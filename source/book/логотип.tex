@@ -1,0 +1,39 @@
+\documentclass[12pt]{article}
+\usepackage[paperwidth=25cm,paperheight=25cm,top=1cm,bottom=1cm,left=1cm,right=1cm]{geometry}
+\usepackage{tikz}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amssymb,amsmath,dejavu}
+\usepackage{eulervm}
+
+\usetikzlibrary{shapes,snakes,arrows,backgrounds,patterns}
+\pagestyle{empty}
+
+\begin{document}
+\hspace{0.5cm}
+\begin{tikzpicture}
+\fill (0cm,0cm) node[regular polygon, regular polygon sides = 13,scale=52,draw =blue!50,rounded corners,double,line width = 5pt,fill=blue!20] {};
+\draw[line width = 3pt,color=blue]  node[rotate=25,scale=4] at (-1.2cm,0.7cm) {$\oint$};
+\draw[line width = 3pt,color=blue]  node[rotate=-5,scale=4] at (1.2cm,0.7cm) {$\sum$};
+\draw[line width = 3pt,color=blue]  node[rotate=0,scale=1.1] at (0cm,-2.1cm) {\Huge{ВМ}};
+\draw[line width = 3pt,color=blue] (-5cm,0cm)  arc (-180:0:5cm);
+\draw[line width = 3pt,color=blue] (0cm,-1cm)--(0cm,2cm)..controls (-0.5cm,2.5cm) and (-2cm,1.5cm)..(-3cm,2cm)
+                                    --(-2cm,-0.8cm)..controls (-1.5cm,-1cm) and (-0.2cm,-0.2cm)..(0cm,-1cm);
+\draw[line width = 3pt,color=blue] (0cm,2cm)..controls (0.5cm,2.5cm) and (2cm,1.5cm)..(3cm,2cm)
+                                    --(2cm,-0.8cm)..controls (1.5cm,-1cm) and (0.2cm,-0.2cm)..(0cm,-1cm);
+\draw[line width = 3pt,color=blue] (-2.9cm,1.72cm)..controls (-3.1cm,1.7cm)..(-3.3cm,1.8cm)
+                                    --(-2.2cm,-1.2cm)..controls (-1.8cm,-1.4cm) and (-0.2cm,-0.2cm)..(0cm,-1cm);
+\draw[line width = 3pt,color=blue] (2.9cm,1.72cm)..controls (3.1cm,1.7cm)..(3.3cm,1.8cm)
+                                    --(2.2cm,-1.2cm)..controls (1.8cm,-1.4cm) and (0.2cm,-0.2cm)..(0cm,-1cm);
+\draw[line width = 3pt,color=blue]  node[rotate=-32,scale=2] at (-2.3cm,-3.3cm) {\Huge{К}};
+\draw[line width = 3pt,color=blue]  node[rotate=32,scale=2] at (2.3cm,-3.3cm) {\Huge{У}} ;
+\draw[line width = 3pt,color=blue]  node[rotate=-15,scale=2] at (-0.8cm,-4cm) {\Huge{Г}};
+\draw[line width = 3pt,color=blue]  node[rotate=15,scale=2] at (0.8cm,-4cm) {\Huge{Т}} ;
+\draw[line width = 3pt,color=blue]  node[scale=2] at (0cm,3.5cm) {\Huge{1897}};
+\draw[line width = 3pt,color=blue] (-3.5cm,0cm) -- (-6.5cm,0cm) arc (180:90:13cm and 7.5cm) -- ++(0cm,-2cm);
+\draw[line width = 3pt,color=blue] (3.5cm,0cm) -- (6.5cm,0cm) arc (0:30:13cm and 7.5cm)..controls (4cm,4.5cm) and (5cm,5.5cm)..(6.5cm,5.5cm);
+\foreach \angle in {-180,-168,...,-12}
+    \draw[line width = 3pt,color=blue] (\angle:5.75cm) arc (\angle:\angle+2:5.75cm) -- (\angle+4:6.5cm)
+    -- (\angle+8:6.5cm)--(\angle+10:5.75cm) arc (\angle+10:\angle+12:5.75cm);
+\end{tikzpicture}
+\end{document} 

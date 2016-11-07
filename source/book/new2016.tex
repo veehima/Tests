@@ -1,0 +1,967 @@
+\documentclass[10pt]{article}
+\usepackage[paperwidth=20cm,paperheight=17cm,top=1.5cm,bottom=1.5cm,left=1cm,right=1cm]{geometry}
+\usepackage{tikz}
+\usepackage{fancybox,xspace,colortbl,calc,ifthen}
+\usepackage{settobox}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amssymb,amsmath,dejavu,pifont}
+\usepackage[pdftex,unicode,pdfborder={0 0 0},pdfhighlight=/P,breaklinks]{hyperref}
+\usepackage{eulervm}
+\usepackage{flowfram}
+\usepackage{picins}
+\usepackage[filename=tooltipy,active]{fancytooltips}
+
+
+\usetikzlibrary{shapes,snakes,arrows,backgrounds}
+
+\newcommand{\sym}{\textcolor{red}{\ding{229}}}
+
+\pagestyle{empty}
+\definecolor{p}{rgb}{1,0.874,0.666}
+\definecolor{pex}{rgb}{0.686,0.898,1}
+\newstaticframe{\paperwidth}{\paperheight}{-1cm}{-1.5cm}[bkr]
+\setstaticcontents*{bkr}{\begin{tikzpicture}[ultra thick]
+                            \shadedraw[left color = red!15,right color = red!50,draw=red!70]
+                                        (0.001\paperwidth,0.001\paperheight) rectangle +(0.2\paperwidth,0.999\paperheight);
+                            \draw[fill = p!50,draw=p]
+                                        (0.202\paperwidth,0.001\paperheight) rectangle +(0.797\paperwidth,0.999\paperheight);
+                        \end{tikzpicture}
+}
+\newflowframe{0.72\textwidth}{\textheight}{0.22\paperwidth}{0cm}
+\newdynamicframe{3cm}{1cm}{-0.3cm}{10.8cm}[but1]
+\newdynamicframe{3cm}{1cm}{-0.3cm}{9.7cm}[but2]
+\newdynamicframe{1.5cm}{1cm}{0.35cm}{8.4cm}[but3]
+\newdynamicframe{1.5cm}{1cm}{-0.475cm}{7.2cm}[but4]
+\newdynamicframe{1.5cm}{1cm}{1.175cm}{7.2cm}[but5]
+\newdynamicframe{1.5cm}{1cm}{0.35cm}{6cm}[but6]
+\newdynamicframe{3cm}{1cm}{-0.3cm}{4.8cm}[but7]
+\newdynamicframe{3cm}{1cm}{-0.3cm}{3.6cm}[but8]
+\newdynamicframe{3cm}{1cm}{-0.3cm}{2.4cm}[but9]
+\newdynamicframe{3cm}{1cm}{-0.3cm}{1.2cm}[but10]
+\newdynamicframe{3cm}{1cm}{-0.3cm}{0cm}[but11]
+\newdynamicframe{3cm}{1cm}{-0.05cm}{-1.5cm}[but12]
+
+\setdynamiccontents*{but1}{
+\href{mailto:amiheev@mail.ru}{\protect\parbox[c][0.9cm][t]{2.7cm}{
+\begin{tikzpicture}[rounded corners=1ex,ultra thick]
+\node[rectangle, shade, top color=blue!20, bottom color=blue!50, draw=blue!50,
+minimum width=2.6cm, minimum height=0.8cm, text centered,font=\footnotesize](h1){Письмо автору};
+\end{tikzpicture}}}}
+\setdynamiccontents*{but2}{
+\ifthenelse{\thepage=2}{\protect\parbox[c][0.9cm][t]{2.7cm}{
+\begin{tikzpicture}[rounded corners=1ex,ultra thick]
+\node[rectangle, shade, top color=blue!10, bottom color=blue!25, draw=blue!25,
+minimum width=2.6cm, minimum height=0.8cm, text centered,font=\footnotesize,text=black!50](h2){Содержание};
+\end{tikzpicture}}}{\hyperlink{cont}{\protect\parbox[c][0.9cm][t]{2.7cm}{
+\begin{tikzpicture}[rounded corners=1ex,ultra thick]
+\node[rectangle, shade, top color=blue!20, bottom color=blue!50, draw=blue!50,
+minimum width=2.6cm, minimum height=0.8cm, text centered,font=\footnotesize](h2){Содержание};
+\end{tikzpicture}}}}}
+\setdynamiccontents*{but3}{
+\ifthenelse{\thepage=1}{\protect\parbox[c][0.9cm][t]{1.4cm}{
+\begin{tikzpicture}[rounded corners=1ex,ultra thick]
+\node[rectangle, shade, top color=blue!10, bottom color=blue!25,
+draw=blue!25, minimum width=1.3cm, minimum height=0.8cm, text
+centered,font=\large,text=black!50](h3){\Large$\blacktriangleleft\!\blacktriangleleft$};
+\end{tikzpicture}}}{\Acrobatmenu{FirstPage}{\protect\parbox[c][0.9cm][t]{1.4cm}{
+\begin{tikzpicture}[rounded corners=1ex,ultra thick]
+\node[rectangle, shade, top color=blue!20, bottom color=blue!50,
+draw=blue!50, minimum width=1.3cm, minimum height=0.8cm, text
+centered,font=\large](h3){\Large$\blacktriangleleft\!\blacktriangleleft$};
+\end{tikzpicture}}}}}
+\setdynamiccontents*{but4}{
+\ifthenelse{\thepage=1}{\protect\parbox[c][0.9cm][t]{1.4cm}{
+\begin{tikzpicture}[rounded corners=1ex,ultra thick]
+\node[rectangle, shade, top color=blue!10, bottom color=blue!25,
+draw=blue!25, minimum width=1.3cm, minimum height=0.8cm, text
+centered,font=\large,text=black!50](h4){\Large$\blacktriangleleft$};
+\end{tikzpicture}}}{\Acrobatmenu{PrevPage}{\protect\parbox[c][0.9cm][t]{1.4cm}{
+\begin{tikzpicture}[rounded corners=1ex,ultra thick]
+\node[rectangle, shade, top color=blue!20, bottom color=blue!50,
+draw=blue!50, minimum width=1.3cm, minimum height=0.8cm, text
+centered,font=\large](h4){\Large$\blacktriangleleft$};
+\end{tikzpicture}}}}}
+\setdynamiccontents*{but5}{
+\ifthenelse{\thepage=\pageref{lastpage}}{\protect\parbox[c][0.9cm][t]{1.4cm}{
+\begin{tikzpicture}[rounded corners=1ex,ultra thick]
+\node[rectangle, shade, top color=blue!10, bottom color=blue!25,
+draw=blue!25, minimum width=1.3cm, minimum height=0.8cm, text
+centered,font=\large,text=black!50](h5){\Large$\blacktriangleright$};
+\end{tikzpicture}}}{\Acrobatmenu{NextPage}{\protect\parbox[c][0.9cm][t]{1.4cm}{
+\begin{tikzpicture}[rounded corners=1ex,ultra thick]
+\node[rectangle, shade, top color=blue!20, bottom color=blue!50,
+draw=blue!50, minimum width=1.3cm, minimum height=0.8cm, text
+centered,font=\large](h5){\Large$\blacktriangleright$};
+\end{tikzpicture}}}}}
+\setdynamiccontents*{but6}{
+\ifthenelse{\thepage=\pageref{lastpage}}{\protect\parbox[c][0.9cm][t]{1.4cm}{
+\begin{tikzpicture}[rounded corners=1ex,ultra thick]
+\node[rectangle, shade, top color=blue!10, bottom color=blue!25,
+draw=blue!25, minimum width=1.3cm, minimum height=0.8cm, text
+centered,font=\large,text=black!50](h6){\Large$\blacktriangleright\!\blacktriangleright$};
+\end{tikzpicture}}}{\Acrobatmenu{LastPage}{\protect\parbox[c][0.9cm][t]{1.4cm}{
+\begin{tikzpicture}[rounded corners=1ex,ultra thick]
+\node[rectangle, shade, top color=blue!20, bottom color=blue!50,
+draw=blue!50, minimum width=1.3cm, minimum height=0.8cm, text
+centered,font=\large](h6){\Large$\blacktriangleright\!\blacktriangleright$};
+\end{tikzpicture}}}}}
+\setdynamiccontents*{but7}{
+\Acrobatmenu{GoBack}{\protect\parbox[c][0.9cm][t]{2.7cm}{
+\begin{tikzpicture}[rounded corners=1ex,ultra thick]
+\node[rectangle, shade, top color=blue!20, bottom color=blue!50, draw=blue!50,
+minimum width=2.6cm, minimum height=0.8cm, text centered,font=\footnotesize](h7) {Вернуться};
+\end{tikzpicture}}}}
+\setdynamiccontents*{but8}{
+\Acrobatmenu{GoToPage}{\protect\parbox[c][0.9cm][t]{2.7cm}{
+\begin{tikzpicture}[rounded corners=1ex,ultra thick]
+\node[rectangle, shade, top color=blue!20, bottom color=blue!50,
+draw=blue!50, minimum width=2.6cm, minimum height=0.8cm, text
+centered,font=\footnotesize](h8) {На страницу\ldots};
+\end{tikzpicture}}}}
+\setdynamiccontents*{but9}{
+\Acrobatmenu{FullScreen}{\protect\parbox[c][0.9cm][t]{2.7cm}{
+\begin{tikzpicture}[rounded corners=1ex,ultra thick]
+\node[rectangle, shade, top color=blue!20, bottom color=blue!50, draw=blue!50,
+minimum width=2.6cm, minimum height=0.8cm, text centered,font=\footnotesize](h9){Во весь экран};
+\end{tikzpicture}}}}
+\setdynamiccontents*{but10}{
+\Acrobatmenu{Close}{\protect\parbox[c][0.9cm][t]{2.7cm}{
+\begin{tikzpicture}[rounded corners=1ex,ultra thick]
+\node[rectangle, shade, top color=blue!20, bottom color=blue!50, draw=blue!50,
+minimum width=2.6cm, minimum height=0.8cm, text centered,font=\footnotesize](h10){Закрыть};
+\end{tikzpicture}}}}
+\setdynamiccontents*{but11}{
+\Acrobatmenu{Quit}{\protect\parbox[c][0.9cm][t]{2.7cm}{
+\begin{tikzpicture}[rounded corners=1ex,ultra thick]
+\node[rectangle, shade, top color=blue!20, bottom color=blue!50, draw=blue!50,
+minimum width=2.6cm, minimum height=0.8cm, text centered,font=\footnotesize](h11){Выход};
+\end{tikzpicture}}}}
+\setdynamiccontents*{but12}{
+Cтр.~\thepage~из~\pageref{lastpage}}
+
+\newdynamicframe{3cm}{2cm}{-0.8cm}{13.3cm}[but13]
+\setdynamiccontents*{but13}{
+\includegraphics[width=0.2\textwidth]{logo}
+}
+
+\newenvironment{defnt}%
+{\begin{center}\fboxsep=1.6\fboxrule \shadowsize=4pt\begin{Sbox}
+\begin{minipage}[c]{0.58\textwidth}}%
+{\end{minipage}\end{Sbox}\shadowbox{\fboxsep=5pt\colorbox[rgb]{1,0.725,0.474}{\TheSbox}}
+\end{center}}
+
+\newcounter{primer}
+\numberwithin{primer}{section}
+\renewcommand{\theprimer}{\thesection.\arabic{primer}}
+
+\newenvironment{examp}%
+{\refstepcounter{primer}
+\begin{center}\fboxsep=1.6\fboxrule \shadowsize=4pt \begin{Sbox}
+\begin{minipage}[c]{0.63\textwidth}\shadowsize=2pt\shadowbox{\fboxsep=2pt\colorbox[rgb]{0.843,0.98,1}{\large
+Пример \theprimer}}
+\par\vspace*{6pt}}%
+{\end{minipage}\end{Sbox}\shadowbox{\fboxsep=5pt\colorbox[rgb]{0.686,0.898,1}{\TheSbox}}
+\end{center}}
+
+
+\newenvironment{ist_fig}[2]%
+{\begin{center}\fboxsep=1.6\fboxrule \shadowsize=4pt\begin{Sbox}
+\begin{minipage}[c]{0.7\textwidth}
+\parpic[r][t]{\includegraphics[width=0.25\textwidth]{#1}}
+\picskip{#2}\small}%
+{\end{minipage}\end{Sbox}\shadowbox{\fboxsep=5pt\colorbox[rgb]{1,0.988,0.737}{\TheSbox}}
+\end{center}}
+
+
+\newcommand{\term}[1]{\textcolor{red}{\emph{#1}}}
+
+\addto{\captionsrussian}{\renewcommand{\abstractname}{Немного об
+этой книге \dots}}
+\renewcommand{\refname}{Список литературы}
+
+\numberwithin{equation}{section}
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+
+\newcommand{\refform}[1]{\textcolor{red}{(\ref{#1})}}
+
+\title{\bf ЛИНЕЙНАЯ АЛГЕБРА ДЛЯ СТУДЕНТОВ ГУМАНИТАРНЫХ СПЕЦИАЛЬНОСТЕЙ}
+\author{\tooltip{Михеев~А.\,В.}{ya}}
+\date{}
+
+\frenchspacing
+\begin{document}
+
+\maketitle
+
+\thispagestyle{empty}
+\begin{abstract}
+%Курс высшей математики для гуманитариев.
+%
+%
+%Слово математика происходит от греческого
+%$\mu\alpha\theta\eta\mu\alpha$ [матэма]
+%--- <<знание>>, <<наука>>.
+Основное предназначение этого электронного учебного пособия --- помочь студентам гуманитарных специальностей самостоятельно освоить программу раздела <<Линейная алгебра>> курса <<Математика>>. Это пособие ни в коем случае не может заменить подробные печатные курсы высшей математики. Главная цель, которую преследовал автор --- дать краткое и, в то же время полное, введение в основные понятия и задачи линейной алгебры. Пособие содержит много иллюстраций, примеров решения типовых задач, сведений из истории математики. 
+
+Много интересной, но не очень важной информации вынесено в аннотации, чтобы их увидеть --- наведите курсор мыши на слово, отмеченное символом \includegraphics[width=0.3cm]{fancytipmark.pdf}, и <<щёлкните>> по нему. Слева --- панель навигации по документу. Смысл имеющихся там кнопочек не требует пояснений\dots 
+
+Надеюсь, это пособие окажется полезным для Вас.
+\end{abstract}\newpage
+\hypertarget{cont}{\tableofcontents}\newpage
+%\section{Линейная алгебра}
+\section{Матрицы и действия над ними}
+
+\begin{defnt}
+Матрицей размерности $m\times n$ называется таблица чисел,
+расположенных в определенном порядке. При этом $m$ задаeт число
+строк в таблице, а $n$ --- число столбцов.
+\end{defnt}
+
+
+Числа, образующие матрицу, называются её элементами. Положение
+каждого элемента однозначно определяется номером строки и столбца,
+на пересечении которых он находится. Элементы матрицы обозначаются
+символом $a_{ij}$, где $i$ --- номер строки, а $j$ --- номер
+столбца.
+\begin{equation}\label{eq:matrix}
+A = \begin{pmatrix}
+  a_{11} & a_{12} & \cdots & a_{1n} \\
+  a_{21} & a_{22} & \cdots & a_{2n} \\
+  \vdots & \vdots & \ddots & \vdots \\
+  a_{m1} & a_{m2} & \cdots & a_{mn} \\
+\end{pmatrix}.
+\end{equation}
+Как видим, номера строк в матрице возрастают снизу вверх, а номера
+столбцов --- слева направо.
+
+\begin{examp}\label{prim:matr}
+Матрица $\begin{pmatrix}
+  -1 & 7 & -5 & 9 & 10 \\
+  2{,}1 &-5{,}06 & -12 & 0 & 4 \\
+\end{pmatrix}$ имеет размерность $2\times5$, т.е. она
+содержит 2 строки и 5 столбцов. $a_{14}=9$ --- элемент, стоящий на
+пересечении 1--ой строки и 4--го столбца;  $a_{22}=-5{,}06$ ---
+элемент, стоящий на пересечении 2--ой строки и 2--го столбца.
+\end{examp}
+
+Матрица может состоять из одной строки, из одного столбца и даже
+из одного элемента. Если все элементы матрицы равны нулю, то её
+называют \term{нулевой} и обозначают символом $O$.
+\begin{defnt}
+Если число столбцов матрицы равно числу строк: $m=n$, то матрица
+называется квадратной $n$--го порядка.
+\end{defnt}
+Линия, вдоль которой в квадратной матрице стоят элементы с равными
+номерами строк и столбцов, обычно называют главной диагональю
+квадратной матрицы.
+\begin{defnt}
+Квадратная матрица, у которой на главной диагонали находятся
+единицы, а все остальные элементы равны нулю, называется
+единичной.
+\end{defnt}
+Т.е. единичная матрица выглядит так:
+\begin{equation}\label{eq:edmatrix}
+E = \begin{pmatrix}
+  1 & 0 & \cdots & 0 \\
+  0 & 1 & \cdots & 0 \\
+  \vdots & \vdots & \ddots & \vdots \\
+  0 & 0 & \cdots & 1 \\
+\end{pmatrix}.
+\end{equation}
+В общем случае, квадратная матрица, у которой все элементы равны
+нулю, за исключением элементов, стоящих на главной диагонали,
+называется \term{диагональной}.
+
+Матрица (\emph{лат.} matrix --- <<матка>>, <<источник>>, <<начало>>) --- важнейшее понятие в
+современной математике. Впервые появилось в работах
+\tooltip{Сильвестра}{silvestr}~и~\tooltip{Кэли}{cayley}.
+
+\newpage
+Важнейшими операциями над матрицами являются:
+\begin{description}
+    \item[\textcolor{red}{\ding{229}}] сложение (вычитание) матриц,
+    \item[\sym] умножение матрицы на число,
+    \item[\sym] умножение одной матрицы на другую,
+    \item[\sym] транспонирование.
+\end{description}
+
+\term{Операции сложения и вычитания матриц} выполняются
+поэлементно и применимы лишь к матрицам одинаковой размерности.
+\begin{defnt}
+Суммой (разностью) матриц $A$ и $B$, имеющих одинаковую
+размерность, является матрица $C$, той же размерности, элементы
+которой есть сумма (разность) соответствующих элементов исходных
+матриц: $C =A\pm B$ $\Leftrightarrow$ $c_{ij}=a_{ij}\pm b_{ij}$.
+\end{defnt}
+
+\term{Операция умножения матрицы на произвольное вещественное
+число} тоже выполняется поэлементно, но применима к любым
+матрицам.
+\begin{defnt}
+Произведением произвольной матрицы $A$ на вещественное число
+$\lambda$ является матрица $C$, той же размерности, что и $A$,
+элементы которой есть произведение соответствующих элементов
+исходной матрицы на число $\lambda$: $C =\lambda \cdot A$
+$\Leftrightarrow$ $c_{ij}=\lambda \cdot a_{ij}$.
+\end{defnt}
+
+В приведенных выше определениях использовался символ <<$\Leftrightarrow$>>, называемый символом эквивалентности.
+Математическое выражение $\alpha\Leftrightarrow\beta$ читается так:
+<<$\alpha$ эквивалентно $\beta$>> или <<$\alpha$ истинно
+тогда и только тогда, когда истинно $\beta$>>.
+
+\newpage
+Перечислим основные свойства операций сложения матриц и умножения
+матриц на вещественные числа:
+
+\begin{description}
+    \item[\sym\quad \tooltip{Коммутативность:}{commut}] $A+B=B+A$.
+    \item[\sym\quad \tooltip{Ассоциативность:}{assot}] $\left(A+B\right)+C=A+\left(B+C\right)$.
+    \item[\sym\quad \tooltip{Дистрибутивность:}{distrib}] $\lambda\cdot\left(A+B\right)=\lambda\cdot A+\lambda\cdot B$.
+\end{description}
+
+
+Нулевая матрица $O$ относительно операции сложения матриц обладает
+теми же свойствами, что и число 0 относительно операции сложения
+вещественных чисел. Это значит, что какова бы ни была матрица $A$,
+справедливы следующие равенства: $A+O=O+A=A$. В этих равенствах
+размерности матриц $A$ и $O$ должны быть равны.
+
+\begin{examp}\label{prim:deistvmatr1}
+Даны матрицы:
+$A=\begin{pmatrix}
+      3 & -4 & 1 \\
+      9 & 3 & 0 \\
+    \end{pmatrix}$,
+$B=\begin{pmatrix}
+      4 & -9 & 3 \\
+      -2 & 2 & 1 \\
+    \end{pmatrix}$.
+
+Найти матрицу $4A -3B$. \\{\bf Решение. }
+\begin{displaymath}
+4A=4\cdot\begin{pmatrix}
+      3 & -4 & 1 \\
+      9 & 3 & 0 \\
+    \end{pmatrix}=\begin{pmatrix}
+      12 & -16 & 4 \\
+      36 & 12 & 0 \\
+    \end{pmatrix}.
+\end{displaymath}
+\begin{displaymath}
+3B=3\cdot\begin{pmatrix}
+       4 & -9 & 3 \\
+      -2 & 2 & 1 \\
+    \end{pmatrix}=\begin{pmatrix}
+       12 & -27 & 9 \\
+      -6 & 6 & 3 \\
+    \end{pmatrix}.
+\end{displaymath}
+\begin{displaymath}
+4A-3B=\begin{pmatrix}
+      12 & -16 & 4 \\
+      36 & 12 & 0 \\
+    \end{pmatrix}-\begin{pmatrix}
+       12 & -27 & 9 \\
+      -6 & 6 & 3 \\
+    \end{pmatrix}=\begin{pmatrix}
+       0 & 11 & -5 \\
+      42 & 6 & -3 \\
+    \end{pmatrix}.
+\end{displaymath}
+\end{examp}
+
+\newpage
+\term{Произведение матриц} можно вычислить лишь в том случае,
+когда количество столбцов в первой матрице совпадает с количеством
+строк во второй.
+\begin{defnt}   Произведением матрицы $A$, имеющей размерность $m\times
+p$, на матрицу $B$, имеющей размерность $p\times n$, называется
+матрица $C$, размерности $m\times n$: $C=A\cdot B$, если элементы
+матрицы $C$ могут быть вычислены по следующей формуле:
+\begin{equation}\label{eq:proizvmatrix}
+    c_{ij}=\sum^p_{k=1}a_{ik}b_{kj}=a_{i1}b_{1j}+a_{i2}b_{2j}+\ldots+a_{ip}b_{pj}.
+\end{equation}
+\end{defnt}
+
+Символ $\sum^p_{k=1}$, использованный в определении, означает сумму
+по элементам некоторого упорядоченного множества
+чисел. Что именно нужно суммировать, написано правее знака $\sum$.
+При этом номера $k$ элементов, включаемых в сумму, принимают
+значения $1,2,\ldots,p$.
+
+Свойства операции умножения матриц:
+\begin{description}
+    \item[\sym] $A\cdot B\neq B\cdot A$ --- произведение матриц не коммутативно;
+    \item[\sym] $\left(A\cdot B\right)\cdot C=A\cdot\left(B\cdot C\right)$ ---
+    произведение матриц ассоциативно;
+    \item[\sym] $A\cdot \left(B+C\right)=A\cdot B+A\cdot C$ ---
+    операция умножения матриц дистрибутивна.
+\end{description}
+
+Единичная матрица $E$ относительно операции умножения квадратных
+матриц обладает теми же свойствами, что и число 1 относительно
+операции умножения вещественных чисел. Это значит, что какова бы
+ни была квадратная матрица $A$, справедливы следующие равенства:
+$A\cdot E=E\cdot A=A$. Правда нужно помнить, что в этих равенствах
+размерности матриц $A$ и $E$ должны быть равны.
+
+
+\newpage
+Операция \term{транспонирования} может быть применена к любым
+матрицам. Она состоит в замене строк матрицы на её столбцы, т.е.
+после транспонирования первый столбец исходной матрицы становится
+первой строкой новой матрицы, второй столбец становится второй
+строкой и т.д. Если матрица $A$ --- исходная, то транспонированная
+матрица обозначается символом $A^{T}$.
+
+\begin{examp}\label{prim:deistvmatr2}
+Найти матрицы $A^{2}$, $B\cdot C$ и $B^{T}$, если
+\begin{equation*}
+    A=\begin{pmatrix}
+      -1 & 2 \\
+      3 & 4 \\
+    \end{pmatrix},B=\begin{pmatrix}
+      0 & 3 & -4 \\
+      1 & 2 & -3 \\
+    \end{pmatrix},C=\begin{pmatrix}
+      -5 \\
+      2 \\
+     -1 \\
+    \end{pmatrix}.
+\end{equation*}
+{\bf Решение.}
+\vspace*{-0.5cm}\begin{multline*}
+1)\quad A^{2}=A\cdot A=\begin{pmatrix}
+      -1 & 2 \\
+      3 & 4 \\
+    \end{pmatrix}\cdot \begin{pmatrix}
+      -1 & 2 \\
+      3 & 4 \\
+    \end{pmatrix}=\\ =\begin{pmatrix}
+      -1\cdot(-1) +2\cdot3 & -1\cdot2 +2\cdot4 \\
+      3\cdot(-1)+ 4\cdot3& 3\cdot2+ 4\cdot4 \\
+    \end{pmatrix}=\begin{pmatrix}
+      7 & 6 \\
+      9& 22 \\
+    \end{pmatrix}.
+\end{multline*}\vspace*{-0.8cm}
+\begin{multline*}
+2)\quad B\cdot C=\begin{pmatrix}
+      0 & 3 & -4 \\
+      1 & 2 & -3 \\
+    \end{pmatrix}\cdot\begin{pmatrix}
+      -5 \\
+      2 \\
+     -1 \\
+    \end{pmatrix}=\\ \qquad \qquad=\begin{pmatrix}
+      0\cdot(-5)+3\cdot2-4\cdot(-1) \\
+      1\cdot(-5)+2\cdot2-3\cdot(-1) \\
+    \end{pmatrix}=\begin{pmatrix}
+      10 \\
+      2 \\
+    \end{pmatrix}.\\
+\shoveleft{3)\quad B^{T}=\begin{pmatrix}
+      0 & 3 & -4 \\
+      1 & 2 & -3 \\
+    \end{pmatrix}^{T}=\begin{pmatrix}
+      0 & 1 \\
+      3 & 2 \\
+      -4 & -3 \\
+    \end{pmatrix}.\hfill}
+\end{multline*}
+\end{examp}
+
+
+
+
+\section{Определители и их свойства}
+
+\begin{defnt}
+Определителем второго порядка, соответствующим квадратной матрице
+$A=\begin{pmatrix}
+  a_{11} & a_{12} \\
+  a_{21} & a_{22} \\
+\end{pmatrix}$,
+называется число, определяемое по формуле: \begin{equation}\label{eq:opred2}
+\det A=\begin{vmatrix}
+  a_{11} & a_{12} \\
+  a_{21} & a_{22} \\
+\end{vmatrix}=a_{11}a_{22}-a_{12}a_{21}.
+\end{equation}
+\end{defnt}
+
+Термин <<определитель>> впервые появился в начале XIX века в
+работах \tooltip{Коши}{cochy}. Однако первым понятие определителя, применительно к
+системам линейных алгебраических уравнений, стал использовать в 1693
+году \tooltip{Лейбниц}{leibn}. Современное обозначение определителя:
+таблица чисел в вертикальных прямых скобках, ввёл Кэли.
+
+\begin{defnt}
+Определителем третьего порядка, соответствующим квадратной матрице
+$A=\begin{pmatrix}
+  a_{11} & a_{12} & a_{13}\\
+  a_{21} & a_{22} & a_{23}\\
+  a_{31} & a_{32} & a_{33}\\
+\end{pmatrix}$,
+называется число, определяемое по формуле: \begin{multline}\label{eq:opred3}
+\det A=\begin{vmatrix}
+  a_{11} & a_{12} & a_{13}\\
+  a_{21} & a_{22} & a_{23}\\
+  a_{31} & a_{32} & a_{33}\\
+\end{vmatrix}
+=a_{11}a_{22}a_{33}+a_{12}a_{23}a_{31}+a_{13}a_{21}a_{32}-\\
+-a_{13}a_{22}a_{31}-a_{11}a_{23}a_{32}-a_{12}a_{21}a_{33}.
+\end{multline}
+\end{defnt}
+
+Формула~\refform{eq:opred3} вычисления определителя третьего порядка кажется
+сложной для запоминания. Однако можно предложить правило
+(так называемое \term{правило Саррюса}), с
+помощью которого эту формулу можно воспроизвести без особых
+усилий. Возьмем определитель третьего порядка и выпишем справа от
+него еще раз первый и второй столбцы. В полученной таким образом
+матрице выделим шесть диагоналей: три главных и три побочных.
+
+\begin{minipage}[c]{0.7\textwidth}
+\centering{\begin{tikzpicture}[scale=1.5]
+\path   (0,2) node (a11) {$a_{11}$}
+        (1,1) node (a22) {$a_{22}$}
+        (2,0) node (a33) {$a_{33}$}
+        (1,2) node (a12) {$a_{12}$}
+        (2,2) node (a13) {$a_{13}$}
+        (0,1) node (a21) {$a_{21}$}
+        (2,1) node (a23) {$a_{23}$}
+        (0,0) node (a31) {$a_{31}$}
+        (1,0) node (a32) {$a_{32}$}
+        (3,2) node (a11d) {$a_{11}$}
+        (3,1) node (a21d) {$a_{21}$}
+        (3,0) node (a31d) {$a_{31}$}
+        (4,2) node (a12d) {$a_{12}$}
+        (4,1) node (a22d) {$a_{22}$}
+        (4,0) node (a32d) {$a_{32}$};
+    \draw (-0.3,-0.2) -- (-0.3,2.2);
+    \draw (2.3,-0.2) -- (2.3,2.2);
+    \draw[draw=p!50,double=blue,very thick]  (a13)--(a22)--(a31);
+    \draw[draw=p!50,double=blue,very thick]  (a11d)--(a23)--(a32);
+    \draw[draw=p!50,double=blue,very thick]  (a12d)--(a21d)--(a33);
+    \draw[draw=p!50,double=red,very thick]  (a11)--(a22)--(a33);
+    \draw[draw=p!50,double=red,very thick]  (a12)--(a23)--(a31d);
+    \draw[draw=p!50,double=red,very thick]  (a13)--(a21d)--(a32d);
+    \end{tikzpicture}}
+\end{minipage}
+Тройки чисел, образующие главные диагонали  и отмеченные на рисунке
+красными линиями, входят в формулу для определителя третьего
+порядка со знаком <<плюс>>. Тройки чисел, образующие побочные
+диагонали (отмечены на рисунке синими линиями), входят  в эту
+формулу со знаком <<минус>>.
+
+Свойства определителей рассмотрим без доказательств
+(доказательства могут быть найдены в~\cite{Ilin:2002}).
+\begin{description}
+    \item[Свойство 1.] Величина определителя не изменится, если
+    все его строки заменить на соответствующие столбцы. Это
+    значит, что для произвольной квадратной матрицы $A$: $\det A = \det
+    A^T$.
+    \item[Свойство 2.] При перестановке любых двух строк (или двух
+    столбцов) определителя, его знак меняется на противоположный.
+    \item[Свойство 3.] Если элементы двух строк (или двух
+    столбцов) определителя пропорциональны (в частности, равны),
+    то такой определитель равен нулю.
+    \item[Свойство 4.] Если все элементы некоторой строки (или
+    столбца) определителя равны нулю, то и сам определитель равен
+    нулю.
+    \item[Свойство 5.] Общий множитель всех элементов некоторой
+    строки (или столбца) определителя можно вынести за знак этого
+    определителя.
+    \item[Свойство 6.] Если к элементам некоторой строки (или
+    столбца) прибавить соответствующие элементы
+    другой строки (столбца), предварительно умноженные на
+    произвольное число, не равное нулю, то величина определителя
+    не изменится.
+\end{description}
+Разумеется все перечисленные свойства справедливы для
+определителей любого порядка.
+
+Существует еще одно свойство определителей, но для его
+формулировки нам потребуются два новых понятия.
+
+Вернемся к формуле~\refform{eq:opred3}:
+\begin{multline*}\begin{vmatrix}
+  a_{11} & a_{12} & a_{13}\\
+  a_{21} & a_{22} & a_{23}\\
+  a_{31} & a_{32} & a_{33}\\
+\end{vmatrix}=a_{11}a_{22}a_{33}+a_{12}a_{23}a_{31}+a_{13}a_{21}a_{32}-\\
+-a_{13}a_{22}a_{31}-a_{11}a_{23}a_{32}-a_{12}a_{21}a_{33}.
+\end{multline*}
+Сформируем в правой части этого равенства три группы из слагаемых, содержащих элементы  первой
+строки определителя: $a_{11}$, $a_{12}$ и $a_{13}$,  и вынесем в
+каждой группе соответствующий элемент за скобку. В результате
+получим:
+
+\begin{multline*}
+\begin{vmatrix}
+  a_{11} & a_{12} & a_{13}\\
+  a_{21} & a_{22} & a_{23}\\
+  a_{31} & a_{32} & a_{33}\\
+\end{vmatrix}=a_{11}\left(a_{22}a_{33}-a_{23}a_{32}\right)+a_{12}\left(a_{23}a_{31}-a_{21}a_{33}\right)+\\
++a_{13}\left(a_{21}a_{32}-a_{22}a_{31}\right).
+\end{multline*}
+Выражение, стоящее в скобках после элемента $a_{11}$, называется
+его \term{алгебраическим дополнением} и обозначается символом
+$A_{11}$, т.\,е. $A_{11}=a_{22}a_{33}-a_{23}a_{32}$. Аналогично,
+$A_{12}=a_{23}a_{31}-a_{21}a_{33}$ --- алгебраическое дополнение
+элемента $a_{12}$, $A_{13}=a_{21}a_{32}-a_{22}a_{31}$
+--- алгебраическое дополнение элемента $a_{13}$. С учетом этих
+новых обозначений формула для вычисления определителя третьего
+порядка принимает вид:
+\begin{equation}\label{eq:str1opred3}
+\begin{vmatrix}
+  a_{11} & a_{12} & a_{13}\\
+  a_{21} & a_{22} & a_{23}\\
+  a_{31} & a_{32} & a_{33}\\
+\end{vmatrix}=a_{11}A_{11}+a_{12}A_{12}+a_{13}A_{13}.
+\end{equation}
+Формула~\refform{eq:str1opred3} называется разложением определителя по элементам
+первой строки. Аналогичные разложения можно записать для элементов
+любой строки и любого столбца определителя.
+
+\begin{defnt}
+Минором $M_{ij}$ элемента $a_{ij}$ определителя $n$-го порядка,
+называется определитель $\left(n-1\right)$-го порядка, получаемый
+из данного определителя вычёркиванием $i$-й строки и $j$-го
+столбца, т.\,е. той строки и того столбца, на пересечении которых
+стоит элемент $a_{ij}$.
+\end{defnt}
+
+\begin{examp}\label{prim:minor}
+\centering{\begin{tikzpicture}[scale=1,transform shape]
+\path   (0,2) node (a11) {$a_{11}$}
+        (1,1) node (a22) {$a_{22}$}
+        (2,0) node (a33) {$a_{33}$}
+        (1,2) node (a12) {$a_{12}$}
+        (2,2) node (a13) {$a_{13}$}
+        (0,1) node (a21) {$a_{21}$}
+        (2,1) node (a23) {$a_{23}$}
+        (0,0) node (a31) {$a_{31}$}
+        (1,0) node (a32) {$a_{32}$}
+        (3,1) node (sled) {$\Rightarrow$}
+        (5,1) node (minor)[fill=green!50,draw] {$M_{11}=\begin{vmatrix}
+          a_{22} & a_{23} \\
+          a_{32} & a_{33} \\
+        \end{vmatrix}$}
+        (8.2,0.7) node (comm)[text width=3cm, text badly centered] {--- минор элемента $a_{11}$}
+        (0,-1) node (a11d) {$a_{11}$}
+        (1,-2) node (a22d) {$a_{22}$}
+        (2,-3) node (a33d) {$a_{33}$}
+        (1,-1) node (a12d) {$a_{12}$}
+        (2,-1) node (a13d) {$a_{13}$}
+        (0,-2) node (a21d) {$a_{21}$}
+        (2,-2) node (a23d) {$a_{23}$}
+        (0,-3) node (a31d) {$a_{31}$}
+        (1,-3) node (a32d) {$a_{32}$}
+        (3,-2) node (sledd) {$\Rightarrow$}
+        (5,-2) node (minord)[fill=green!50,draw] {$M_{32}=\begin{vmatrix}
+          a_{11} & a_{13} \\
+          a_{21} & a_{23} \\
+        \end{vmatrix}$}
+        (8.2,-2.3) node (commd)[text width=3cm, text badly centered] {--- минор элемента $a_{32}$};
+    \draw (-0.4,-0.2) -- (-0.4,2.2);
+    \draw (2.4,-0.2) -- (2.4,2.2);
+    \draw (-0.4,-3.2) -- (-0.4,-0.8);
+    \draw (2.4,-3.2) -- (2.4,-0.8);
+    \draw[draw=pex,double=red, very thin]  (-0.2,-0.2)--(-0.2,2.2);
+    \draw[draw=pex,double=red, very thin]  (-0.3,2.03)--(2.3,2.03);
+    \draw[draw=pex,double=red, very thin]  (0.8,-3.2)--(0.8,-0.8);
+    \draw[draw=pex,double=red, very thin]  (-0.3,-2.97)--(2.3,-2.97);
+\end{tikzpicture}}
+\end{examp}
+
+Минор и алгебраическое дополнение элемента определителя связаны
+друг с другом простым соотношением. Нетрудно убедиться в
+справедливости следующего правила:
+\begin{defnt}
+Алгебраическое дополнение $A_{ij}$ элемента $a_{ij}$ определителя
+и минор $M_{ij}$ этого элемента связаны равенством
+\begin{equation}\label{eq:algdop}
+    A_{ij}=\left(-1\right)^{i+j}M_{ij}.
+\end{equation}
+\end{defnt}
+Данное равенство можно рассматривать как определение
+алгебраического дополнения.
+
+Теперь мы готовы сформулировать последнее свойство определителей.
+\begin{description}
+    \item[Свойство 7.]\hfill
+        \begin{itemize}
+        \item Сумма произведений элементов какой-либо строки
+        (столбца) определителя на соответствующие алгебраические
+        дополнения элементов этой строки (столбца) равна величине
+        этого определителя.
+        \item Сумма произведений элементов какой-либо строки
+        (столбца) определителя на соответствующие алгебраические
+        дополнения элементов другой строки (столбца) равна нулю.
+    \end{itemize}
+\end{description}
+
+
+
+\section{Системы линейных алгебраических уравнений и их решение методом Крамера}
+
+\begin{defnt}
+Будем называть системой $m$ линейных алгебраических уравнений с $n$ неизвестными совокупность уравнений
+следующего вида:
+\begin{equation}\label{eq:system}
+\begin{cases}
+  a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n = b_1 \\
+  a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n = b_2 \\
+  \dots\dots\dots\dots\dots\dots\dots\dots\dots\dots\\
+  a_{m1}x_1 + a_{m2}x_2 + \cdots + a_{mn}x_n = b_m
+\end{cases}
+\end{equation}
+\end{defnt}
+
+В формуле~\refform{eq:system} $x_1,x_2,\dots,x_n$ --- неизвестные,
+подлежащие определению. Коэффициенты при неизвестных образуют
+матрицу:
+\begin{equation*}\label{eq:systmatrix}
+A = \begin{pmatrix}
+  a_{11} & a_{12} & \cdots & a_{1n} \\
+  a_{21} & a_{22} & \cdots & a_{2n} \\
+  \vdots & \vdots & \ddots & \vdots \\
+  a_{m1} & a_{m2} & \cdots & a_{mn} \\
+\end{pmatrix},
+\end{equation*}
+называемую \term{основной матрицей системы}. Правые части уравнений системы~\refform{eq:system},
+а также неизвестные, образуют два вектор-столбца:
+\begin{equation*}\label{eq:stolbsvobchl}
+B = \begin{pmatrix}
+  b_1 \\
+  b_2 \\
+  \vdots \\
+  b_m \\
+\end{pmatrix},
+X = \begin{pmatrix}
+  x_1 \\
+  x_2 \\
+  \vdots \\
+  x_n \\
+\end{pmatrix},
+\end{equation*}
+которые называются \term{век\-то\-ром-столб\-цом сво\-бод\-ных чле\-нов} и \term{век\-то\-ром-столб\-цом не\-из\-вест\-ных}, соответственно.
+
+Используя эти обозначения и определение произведения матриц \refform{eq:proizvmatrix}, можно
+записать систему уравнений~\refform{eq:system} в матричной форме:
+\begin{equation*}\label{eq:systmatrform}
+A\cdot X = B.
+\end{equation*}
+
+Далее приведена диаграмма, демонстрирующая классификацию систем линейных алгебраических уравнений (СЛАУ).
+На этой диаграмме используются следующие обозначения:
+\begin{description}
+    \item[\sym] $X\exists$ --- <<$X$ существует>>;
+    \item[\sym] $X\nexists$ --- <<$X$ не существует>>;
+    \item[\sym] $X\exists !$ --- <<$X$ существует и единственен>>;
+    \item[\sym] $X\exists\infty$ --- <<существует бесконечно много $X$>>.
+\end{description}
+
+\begin{tikzpicture}[auto]
+\tikzstyle{decision} = [aspect=2, diamond, draw=blue, thick, fill=blue!20,
+text width=6em, text badly centered, inner sep=1pt];
+\tikzstyle{block} = [rectangle, draw=blue, thick, fill=blue!20,
+text width=9em, text centered, rounded corners, minimum height=2em];
+\tikzstyle{line} = [draw, thick, -latex',shorten >=2pt];
+\tikzstyle{cloud} = [draw=red, thick, ellipse, fill=red!20, minimum height=2em];
+\matrix [column sep=4mm, row sep=6mm]
+{
+% row 1
+\node [cloud] (n1) {$B=O$}; & \node [decision] (init) {СЛАУ}; & \node [cloud] (n2) {$B\neq O$}; \\
+% row 2
+\node [block] (one) {Однородные};& & \node [block] (two) {Неоднородные}; \\
+% row 3
+& \node [cloud] (n4) {$X\exists$}; & \node [cloud] (n3) {$X\nexists$};  \\
+% row 4
+& \node [block] (three) {Совместные}; & \node [block] (four) {Несовместные}; \\
+% row 5
+\node [cloud] (n5) {$X\exists !$}; & \node [cloud] (n6) {$X\exists\infty$}; &  \\
+% row 6
+\node [block] (five) {Определенные};& \node [block] (six) {Неопределенные}; & \\
+};
+\tikzstyle{every path}=[line]
+\path (init) --  (n1);
+\path (init) --  (n2);
+\path (n1) -- (one);
+\path (n2) -- (two);
+\path (two) -- (n4);
+\path (two) -- (n3);
+\path (one) -- (n4);
+\path (n3) -- (four);
+\path (n4) -- (three);
+\path (three) -- (n5);
+\path (three) -- (n6);
+\path (n5) -- (five);
+\path (n6) -- (six);
+\end{tikzpicture}
+
+\begin{defnt}
+Решить систему линейных алгебраических уравнений --- это значит найти такие значения неизвестных
+$x_1=x_1^{*},x_2=x_2^{*},\dots,x_n=x_n^{*}$, которые после подстановки в~\refform{eq:system}
+обращают каждое уравнение этой системы в тождество.
+\end{defnt}
+
+В случае, если $m=n$, т.\,е. число уравнений равно числу неизвестных, и $\det A \neq 0$
+решение системы линейных алгебраических уравнений \refform{eq:system} единственно и может быть найдено методом \tooltip{Крамера}{kramer}.
+Рассмотрим этот метод на примере системы из трёх уравнений на три неизвестных:
+\begin{equation*}\label{eq:triuravn}
+\begin{cases}
+  a_{11}x_1 + a_{12}x_2 + a_{13}x_3 = b_1 \\
+  a_{21}x_1 + a_{22}x_2 + a_{23}x_3 = b_2 \\
+  a_{31}x_1 + a_{32}x_2 + a_{33}x_3 = b_3
+\end{cases}
+\Leftrightarrow
+\begin{pmatrix}
+  a_{11} & a_{12} & a_{13} \\
+  a_{21} & a_{22} & a_{23} \\
+  a_{31} & a_{32} & a_{33} \\
+\end{pmatrix}\cdot
+\begin{pmatrix}
+  x_1 \\
+  x_2 \\
+  x_3 \\
+\end{pmatrix}=
+\begin{pmatrix}
+  b_1 \\
+  b_2 \\
+  b_3 \\
+\end{pmatrix}.
+\end{equation*}
+
+В методе Крамера необходимо вычислить несколько определителей:
+\begin{enumerate}
+  \item Главный определитель системы:
+$\Delta=\det A=\begin{vmatrix}
+  a_{11} & a_{12} & a_{13}\\
+  a_{21} & a_{22} & a_{23}\\
+  a_{31} & a_{32} & a_{33}\\
+\end{vmatrix}.$
+  \item Определители неизвестных $x_1,x_2,x_3$:
+ \begin{equation*}\Delta_1=\begin{vmatrix}
+  b_1 & a_{12} & a_{13}\\
+  b_2 & a_{22} & a_{23}\\
+  b_3 & a_{32} & a_{33}\\
+\end{vmatrix}, \Delta_2=\begin{vmatrix}
+  a_{11} & b_1 & a_{13}\\
+  a_{21} & b_2 & a_{23}\\
+  a_{31} & b_3 & a_{33}\\
+\end{vmatrix}, \Delta_3=\begin{vmatrix}
+  a_{11} & a_{12} & b_1\\
+  a_{21} & a_{22} & b_2\\
+  a_{31} & a_{32} & b_3\\
+\end{vmatrix}.\end{equation*}
+\end{enumerate}
+После этого решение СЛАУ может быть найдено по формулам Крамера:
+\begin{equation}\label{eq:kramer}
+x_1=\frac{\Delta_1}{\Delta},x_2=\frac{\Delta_2}{\Delta},x_3=\frac{\Delta_3}{\Delta}.
+\end{equation}
+
+\begin{examp}\label{prim:kramer}
+Решить методом Крамера:
+$\begin{cases}
+  -x_1 + 2x_2 + 3x_3 = -1 \\
+  2x_1 -5x_2 + x_3 = 10 \\
+  4x_1 + 3x_2 -7x_3 =-2
+\end{cases}.$
+\\{\bf Решение.}
+\begin{multline*}\Delta=\begin{vmatrix}
+  -1 & 2 & 3\\
+  2 & -5 & 1\\
+  4 & 3 & -7\\
+\end{vmatrix}=-1\cdot(-1)^{2}\begin{vmatrix}
+  -5 & 1\\
+  3 & -7\\
+\end{vmatrix}+ 2\cdot(-1)^{3}\begin{vmatrix}
+  2 &  1\\
+  4 & -7\\
+\end{vmatrix}+ \\ +3\cdot(-1)^{4}\begin{vmatrix}
+  2 & -5 \\
+  4 & 3 \\
+\end{vmatrix}= -32+36+78=82.
+\end{multline*}
+\begin{multline*}\Delta_1=\begin{vmatrix}
+  -1 & 2 & 3\\
+  10 & -5 & 1\\
+  -2 & 3 & -7\\
+\end{vmatrix}=-1\cdot(-1)^{2}\begin{vmatrix}
+  -5 & 1\\
+  3 & -7\\
+\end{vmatrix}+ 2\cdot(-1)^{3}\begin{vmatrix}
+  10 &  1\\
+  -2 & -7\\
+\end{vmatrix}+ \\ +3\cdot(-1)^{4}\begin{vmatrix}
+  10 & -5 \\
+  -2 & 3 \\
+\end{vmatrix}= -32+136+60=164.
+\end{multline*}
+Аналогично: $\Delta_2=\begin{vmatrix}
+  -1 & -1 & 3\\
+  2 & 10 & 1\\
+  4 & -2 & -7\\
+\end{vmatrix}=-82,
+\Delta_3=\begin{vmatrix}
+  -1 & 2 & -1\\
+  2 & -5 & 10\\
+  4 & 3 & -2\\
+\end{vmatrix}=82.$
+Отсюда по формулам Крамера \refform{eq:kramer} находим:
+\begin{equation*}
+    x_1=\frac{164}{82}=2,
+    x_2=\frac{-82}{82}=-1,
+    x_3=\frac{82}{82}=1.
+\end{equation*}
+\textbf{Ответ:} $(2;-1;1)$.
+\end{examp}
+
+%\section{Векторная алгебра}
+%\section{Векторы и линейные операции над ними}
+%\begin{defnt}
+%Вектором называется направленный отрезок прямой.
+%\end{defnt}
+%Если точка $A$ --- начало вектора, а $B$ --- его конец, то вектор обозначают символом $\overrightarrow{AB}$.
+%Можно также использовать строчные буквы латинского алфавита, например, $\vec{a}$. Длина вектора
+%обозначается символом $|\overrightarrow{AB}|$ или $\left|\vec{a}\right|$ и равна
+%расстоянию между началом и концом вектора.
+%
+%\begin{defnt}
+%Вектор называется нулевым, если его начало и конец совпадают.
+%\end{defnt}
+%Таким образом, нулевой вектор $\overrightarrow{O}$ имеет длину, равную нулю, и не имеет определённого направления.
+%
+%\begin{defnt}
+%Векторы, лежащие на параллельных прямых, называются коллинеарными.
+%Векторы, лежащие в параллельных плоскостях, называются компланарными.
+%\end{defnt}
+%
+%Вектор $\vec{a}$ равен вектору $\vec{b}$, т.е. $\vec{a}=\vec{b}$, если выполняются следующие три условия:
+%\begin{enumerate}
+%  \item $\left|\vec{a}\right|=|\vec{b}|$;
+%  \item $\vec{a}\parallel\vec{b}$ (векторы коллинеарны);
+%  \item $\vec{a}\upuparrows\vec{b}$ (векторы сонаправлены).
+%\end{enumerate}
+%
+%\section{Прямоугольная система координат. Координаты вектора}
+%
+%\section{Скалярное произведение векторов}
+%
+%\begin{thebibliography}{99}
+%\bibitem{Ilin:2002} \emph{Ильин В.\,А., Куркина А.\,В.} Высшая
+%математика. -- М.: ООО <<ТК Велби>>, 2002. --- 592 с.
+%\bibitem{lit2}
+%\bibitem{lit3}
+%\bibitem{lit4}
+%\end{thebibliography}
+
+
+\label{lastpage}
+\TooltipHidden
+\end{document}

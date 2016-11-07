@@ -1,0 +1,70 @@
+\documentclass[12pt]{article}
+\usepackage[paperwidth=20cm,paperheight=17cm,top=1.5cm,bottom=1.5cm,left=1cm,right=1cm]{geometry}
+\usepackage{tikz}
+\usepackage{fancybox,xspace,colortbl,calc,ifthen}
+\usepackage{settobox}
+\usepackage[cp1251]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath}\usepackage[unicode]{hyperref}
+\usepackage[lf]{MinionPro}
+\usepackage{flowfram}
+\usepackage[pdftex,execJS]{exerquiz}
+\usepackage[filename=tooltipy]{fancytooltips}
+
+
+\def\TooltipExtratext{\hbox to 0 pt{\smash
+ {\raisebox{0.5em}{\includegraphics[width=1em]%
+ {hand_point2.png}}}\hss}}
+%
+
+\newdynamicframe{0cm}{0cm}{0.9\paperwidth}{0.7\paperheight}[but1]
+\setdynamiccontents*{but1}{\frametip}
+
+\begin{document}
+Информация о \tooltip{\textcolor{red}{Сильвестре}}{silv}. Вот такие
+пироги!!!
+
+Произведением произвольной матрицы $A$ на вещественное число
+$\lambda$ является матрица $C$, той же размерности, что и $A$,
+элементы которой есть произведение соответствующих элементов
+исходной матрицы на число $\lambda$: $C =\lambda \cdot A$
+$\Leftrightarrow$ $c_{ij}=\lambda \cdot a_{ij}$.
+
+В приведенных выше определениях использовался символ \flqq
+$\Leftrightarrow$\frqq, называемый символом эквивалентности.
+Математическое выражение $\alpha\Leftrightarrow\beta$ читается так:
+\flqq $\alpha$ эквивалентно $\beta$\frqq или \flqq $\alpha$ истинно
+тогда и только тогда, когда истинно $\beta$\frqq.
+
+Произведением произвольной матрицы $A$ на вещественное число
+$\lambda$ является матрица $C$, той же размерности, что и $A$,
+элементы которой есть произведение соответствующих элементов
+исходной матрицы на число $\lambda$: $C =\lambda \cdot A$
+$\Leftrightarrow$ $c_{ij}=\lambda \cdot a_{ij}$.
+
+В приведенных выше определениях использовался символ \flqq
+$\Leftrightarrow$\frqq, называемый символом эквивалентности.
+Математическое выражение $\alpha\Leftrightarrow\beta$ читается так:
+\flqq $\alpha$ эквивалентно $\beta$\frqq или \flqq $\alpha$ истинно
+тогда и только тогда, когда истинно $\beta$\frqq.
+
+Произведением произвольной матрицы $A$ на вещественное число
+$\lambda$ является матрица $C$, той же размерности, что и $A$,
+элементы которой есть произведение соответствующих элементов
+исходной матрицы на число $\lambda$: $C =\lambda \cdot A$
+$\Leftrightarrow$ $c_{ij}=\lambda \cdot a_{ij}$.
+
+В приведенных выше определениях использовался символ \flqq
+$\Leftrightarrow$\frqq, называемый символом эквивалентности.
+Математическое выражение $\alpha\Leftrightarrow\beta$ читается так:
+\flqq $\alpha$ эквивалентно $\beta$\frqq или \flqq $\alpha$ истинно
+тогда и только тогда, когда истинно $\beta$\frqq.
+
+Информация о \tooltip{Сильвестре}{silv} \tooltip{Сильвестре}{silv}
+\tooltip{Сильвестре}{silv} \tooltip{Сильвестре}{silv}
+\tooltip{Сильвестре}{silv} \tooltip{Сильвестре}{silv}
+\tooltip{Сильвестре}{silv} \tooltip{Сильвестре}{silv}.
+\newpage
+page 2
+\TooltipHidden
+\end{document}

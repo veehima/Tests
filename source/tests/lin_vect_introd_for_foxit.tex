@@ -1,0 +1,269 @@
+\documentclass[12pt]{article}
+\usepackage[outline]{contour}
+\usepackage[paperwidth=8in,paperheight=7in,top=1.2in,bottom=0.6in,left=0.4in,right=0.4in]{geometry}
+\usepackage{fancybox,xspace,colortbl,calc,ifthen}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{arev}
+\usepackage[scaled=1.1]{PTSans}
+\usepackage[utf8]{inputenx}
+\usepackage[russian]{babel}
+\usepackage[T2A]{fontenc}
+\usepackage{floatrow}
+\usepackage{makecell,multirow}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{textcomp}
+\usepackage[pdftex,unicode,pdfpagelayout=SinglePage,%
+]{hyperref}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\definecolor{background}{rgb}{0.99,0.98,0.85}
+\pagecolor{background}
+\definecolor{siniy}{RGB}{46,48,146}
+\definecolor{zadan}{RGB}{181,223,253}
+\definecolor{golub}{RGB}{224,222,239}
+\definecolor{zhelt}{RGB}{255,221,47}
+\definecolor{cerise}{rgb}{0.87, 0.19, 0.39}
+\definecolor{taupe}{rgb}{0.28, 0.24, 0.2}
+\definecolor{mintgreen}{rgb}{0.6, 1.0, 0.6}
+\definecolor{magicmint}{rgb}{0.67, 0.94, 0.82}
+\definecolor{emerald}{rgb}{0.31, 0.78, 0.47}
+\definecolor{gr}{RGB}{2, 184, 3}
+\definecolor{mg}{RGB}{160, 53, 213}
+\definecolor{fgr}{RGB}{152, 223, 138}
+
+\usepackage{flowfram}
+\newflowframe{\textwidth}{\textheight}{0cm}{0cm}
+
+
+\setlength{\parindent}{0.0cm}
+
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}%
+	{\hbox{\mathsurround=0pt #1}}{}}
+
+
+\usetikzlibrary{arrows,topaths,shapes,shadows}
+
+\newcounter{var}
+
+\renewcommand{\thevar}{\arabic{var}}
+
+\newcommand{\tvar}{
+	\refstepcounter{var}
+	\begin{center}
+		\textbf{\large{Вариант №\thevar}}\vspace{1pt}
+	\end{center}
+}
+
+\newcounter{test}
+\renewcommand{\thetest}{\arabic{test}}
+
+\newcommand{\tstfr}[8]{
+	\refstepcounter{test}
+	\ifthenelse{\thetest=10}{\setcounter{test}{1}}{\relax}
+	\noindent{\color{siniy}\hrulefill}\,\fcolorbox{siniy}{siniy}{\color{zhelt}{\textbf{Задание №\thetest}}}\,{\color{siniy}\hrulefill}\vspace{4pt}\\#4
+	
+	\begin{center}
+		\begin{Form}
+			\ChoiceMenu[name=#1,width=#2cm,radio=true,radiosymbol=4,bordercolor={0.65 0.79 0.94}]{}{{#5}={1},
+				{\hspace*{#3cm}#6}={2},
+				{\hspace*{#3cm}#7}={3},
+				{\hspace*{#3cm}#8}={4}}	
+		\end{Form}
+	\end{center}}
+	
+\newcommand{\tstfv}[9]{
+	\refstepcounter{test}
+	\ifthenelse{\thetest=10}{\setcounter{test}{1}}{\relax}
+	\noindent{\color{siniy}\hrulefill}\,\fcolorbox{siniy}{siniy}{\color{zhelt}{\textbf{Задание №\thetest}}}\,{\color{siniy}\hrulefill}\vspace{4pt}\\#4
+	
+	\begin{center}
+		\begin{Form}
+			\ChoiceMenu[name=#1,width=#2cm,radio=true,radiosymbol=4,bordercolor={0.65 0.79 0.94}]{}{{#5}={1},
+				{\hspace*{#3cm}#6}={2},
+				{\hspace*{#3cm}#7}={3},
+				{\hspace*{#3cm}#8}={4},
+				{\hspace*{#3cm}#9}={5}}	
+		\end{Form}
+	\end{center}}
+
+\newcommand{\knopka}[2]{\protect\parbox[c][0.4in][t]{1.2in}{\begin{tikzpicture}
+		\node[
+		rectangle,
+		rounded corners=2ex, 
+		minimum width=3cm,
+		minimum height=1cm,
+		top color=#1!30!white,
+		bottom color=#1,
+		draw=#1!90!black,
+		thick,
+		append after command={
+			node[rectangle,
+			rounded corners=2ex,
+			draw=#1!90!white,
+			minimum width=2.93cm,
+			minimum height=0.93cm,
+			font=\sffamily]at(\tikzlastnode.center)
+			{\textcolor{white}{\contour{#1}{#2}}}
+		},
+		general shadow={
+			shadow xshift=.2ex, shadow yshift=-.2ex,
+			opacity=.5, fill=black!50,
+		}
+	](knp){};
+	\end{tikzpicture}}}
+
+\DeclareMathOperator{\rg}{rg}
+
+\makeatletter
+\renewcommand{\@biblabel}[1]{#1.\hfill}
+\makeatother
+
+
+\usepackage[pdftex]{insdljs}
+\begin{insDLJS}[exaacb]{exaacb}{JavaScript functions}
+	
+%	function docOpen(){
+%		app.fs.isFullScreen = true;
+%	}
+
+	if(app.fs.isFullScreen==false){app.fs.isFullScreen = true;}
+	
+	function random(seed)
+	{
+		if (!seed)
+		seed = new Date().getTime();
+		seed = (seed*9301+49297) \% 233280;
+		return seed/(233280.0);
+	}
+		
+	function getRandomInt(min, max) {
+		min = Math.ceil(min);
+		max = Math.floor(max);
+		return Math.floor(random() * (max - min)) + min;
+	}
+		
+	function doTest(){
+		var file=["lin_vect_var1.pdf","lin_vect_var2.pdf","lin_vect_var3.pdf","lin_vect_var4.pdf","lin_vect_var5.pdf","lin_vect_var6.pdf","lin_vect_var7.pdf","lin_vect_var8.pdf","lin_vect_var9.pdf","lin_vect_var10.pdf","lin_vect_var11.pdf","lin_vect_var12.pdf","lin_vect_var13.pdf","lin_vect_var14.pdf","lin_vect_var15.pdf","lin_vect_var16.pdf","lin_vect_var17.pdf","lin_vect_var18.pdf","lin_vect_var19.pdf","lin_vect_var20.pdf","lin_vect_var21.pdf","lin_vect_var22.pdf","lin_vect_var23.pdf","lin_vect_var24.pdf","lin_vect_var25.pdf","lin_vect_var26.pdf","lin_vect_var27.pdf","lin_vect_var28.pdf","lin_vect_var29.pdf","lin_vect_var30.pdf"];
+		return "Vars/"+file[getRandomInt(0, file.length)];
+		}
+	
+	function doTestReadonly(){
+		var flds=["start","FirstName","LastName","MiddleName","Group"];
+		var s = 0;
+		for(var i = 1; i < flds.length; i++){
+			if(this.getField(flds[i]).value==""){this.getField(flds[i]).fillColor = [ "RGB", 0.89, 0.02, 0.17 ];				
+				s+=1}
+			else{this.getField(flds[i]).fillColor = [ "RGB", 1, 1, 1 ]};
+		}
+		if(s==0){
+			for(var i = 0; i < flds.length; i++){
+				this.getField(flds[i]).readonly=true;}
+			var otherDoc =app.openDoc(doTest(),this);
+			otherDoc.getField("fio").value=this.getField("FirstName").value+" "+this.getField("LastName").value+" "+this.getField("MiddleName").value+","+" "+String.fromCharCode(1075, 1088, 46, 32, 8470)+" "+this.getField("Group").value;					
+		}else{app.alert({			
+			cMsg: String.fromCharCode(1053, 1077, 32, 1074, 1089, 1077, 32, 1087, 1086, 1083, 1103, 32, 1092, 1086, 1088, 1084, 1099, 32, 1079, 1072, 1087, 1086, 1083, 1085, 1077, 1085, 1099, 33, 32, 1063, 1090, 1086, 1073, 1099, 32, 1087, 1088, 1086, 1076, 1086, 1083, 1078, 1080, 1090, 1100, 32, 1090, 1077, 1089, 1090, 1080, 1088, 1086, 1074, 1072, 1085, 1080, 1077, 44, 32, 1079, 1072, 1087, 1086, 1083, 1085, 1080, 1090, 1077, 32, 1087, 1086, 1083, 1103, 44, 32, 1074, 1099, 1076, 1077, 1083, 1077, 1085, 1085, 1099, 1077, 32, 1082, 1088, 1072, 1089, 1085, 1099, 1084, 32, 1094, 1074, 1077, 1090, 1086, 1084, 46),			
+			cTitle: String.fromCharCode(1042, 1053, 1048, 1052, 1040, 1053, 1048, 1045, 33),				
+		});}
+	}
+
+function doTest1(){
+	var file=["lin_vect_var_prob.pdf"];
+	return "Prob/"+file[getRandomInt(0, file.length)];
+}
+
+function doTestReadonly1(){
+	var flds=["startprob","FirstName","LastName","MiddleName","Group"];
+	var s = 0;
+	for(var i = 1; i < flds.length; i++){
+		if(this.getField(flds[i]).value==""){this.getField(flds[i]).fillColor = [ "RGB", 0.89, 0.02, 0.17 ];
+			s+=1}
+		else{this.getField(flds[i]).fillColor = [ "RGB", 1, 1, 1 ]};
+	}
+	if(s==0){
+		for(var i = 0; i < flds.length; i++){
+			this.getField(flds[i]).readonly=true;}
+		var otherDoc =app.openDoc(doTest1(),this);
+		otherDoc.getField("fio").value=this.getField("FirstName").value+" "+this.getField("LastName").value+" "+this.getField("MiddleName").value+","+" "+String.fromCharCode(1075, 1088, 46, 32, 8470)+" "+this.getField("Group").value;					
+	}else{app.alert({			
+		cMsg: String.fromCharCode(1053, 1077, 32, 1074, 1089, 1077, 32, 1087, 1086, 1083, 1103, 32, 1092, 1086, 1088, 1084, 1099, 32, 1079, 1072, 1087, 1086, 1083, 1085, 1077, 1085, 1099, 33, 32, 1063, 1090, 1086, 1073, 1099, 32, 1087, 1088, 1086, 1076, 1086, 1083, 1078, 1080, 1090, 1100, 32, 1090, 1077, 1089, 1090, 1080, 1088, 1086, 1074, 1072, 1085, 1080, 1077, 44, 32, 1079, 1072, 1087, 1086, 1083, 1085, 1080, 1090, 1077, 32, 1087, 1086, 1083, 1103, 44, 32, 1074, 1099, 1076, 1077, 1083, 1077, 1085, 1085, 1099, 1077, 32, 1082, 1088, 1072, 1089, 1085, 1099, 1084, 32, 1094, 1074, 1077, 1090, 1086, 1084, 46),			
+		cTitle: String.fromCharCode(1042, 1053, 1048, 1052, 1040, 1053, 1048, 1045, 33),				
+	});}
+}
+
+\end{insDLJS}
+\OpenAction{/S /JavaScript /JS ()}
+\newcommand{\textforlabel}[2]{%
+	\TextField[name={#1},value={#2},width=6cm,align=2,%
+	bordercolor={0.99 0.98 0.85},%
+	backgroundcolor={0.99 0.98 0.85},readonly=true]{}%
+}
+
+\hypersetup{ 
+	pdfauthor   = {Михеев Андрей}, 
+	pdfkeywords = {LaTeX, линейная алгебра, векторная алгебра, тесты, электронные формы}, 
+	pdftitle    = {Тесты по теме "Линейная и векторная алгебра"} 
+}
+
+\pagestyle{empty}
+
+\begin{document}
+	
+	\title{Тесты по теме "Линейная и векторная алгебра"}
+	\author{Михеев Андрей}
+	\date{\today}
+
+\tikzstyle{mybox} = [draw=blue!50!cyan, fill=zadan, very thick,
+rectangle, rounded corners, inner sep=10pt, inner ysep=20pt]
+\tikzstyle{fancytitle} =[fill=blue!50!cyan, text=white, ellipse]
+%
+\begin{center}
+	\begin{tikzpicture}[transform shape, rotate=0, baseline=-3.5cm]
+\node [mybox] (box) {%
+	\begin{Form}
+	\begin{tabular}{ r l  }
+	\multicolumn{2}{c}{
+		\vspace*{0.5cm}\begin{minipage}[c]{0.8\textwidth}
+		Вы открыли тестовые задания по теме <<Линейная и векторная алгебра>>. Вам предстоит выполнить 9 заданий в течении 90 минут. 
+		
+		Заполните форму ниже. Далее нажмите кнопку <<РЕАЛЬНОЕ>>, чтобы перейти к реальному тестированию, или --- кнопку <<ПРОБНОЕ>>, чтобы попробовать свои силы в учебном тестировании. 
+		
+		Будьте внимательны: тестовые задания не будут загружены, если хотя бы одно поле формы останется пустым!
+		\end{minipage}} \\
+	\hspace*{2cm}\vspace*{0.2cm}Фамилия&
+	\TextField[%
+	name=FirstName,align=0,width=7cm,bordercolor={0 0 0}]{}\\
+	\vspace*{0.2cm}Имя&\TextField[%
+	name=LastName,align=0,width=7cm,bordercolor={0 0 0}]{}\\
+	\vspace*{0.2cm}Отчество&\TextField[%
+	name=MiddleName,align=0,width=7cm,bordercolor={0 0 0}]{}\\
+	\vspace*{0.2cm}№ группы&\TextField[%
+	name=Group,align=0,width=7cm,bordercolor={0 0 0}]{}
+\end{tabular}
+\end{Form}};
+\node[fancytitle] at (box.north) {ТЕСТИРОВАНИЕ};
+\end{tikzpicture}
+\end{center}
+
+
+\begin{center}
+	\begin{tabular}{cc}
+	\begin{Form}
+	\PushButton[name=start,%
+				onclick={doTestReadonly()},bordercolor=background]{
+						\knopka{blue!50!cyan}{РЕАЛЬНОЕ}}	
+\end{Form}&
+	\begin{Form}
+		\PushButton[name=startprob,%
+		onclick={doTestReadonly1()},bordercolor=background]{
+			\knopka{blue!50!cyan}{ПРОБНОЕ}}	
+	\end{Form}
+\end{tabular}
+\end{center}
+
+\end{document}

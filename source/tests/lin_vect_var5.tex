@@ -1,0 +1,626 @@
+\documentclass[12pt]{article}
+\usepackage[outline]{contour}
+\usepackage[paperwidth=8in,paperheight=7in,top=1.2in,bottom=0.6in,left=0.4in,right=0.4in]{geometry}
+\usepackage{fancybox,xspace,colortbl,calc,ifthen}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{tabu,amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{arev}
+\usepackage[scaled=1.1]{PTSans}
+\usepackage[utf8]{inputenx}
+\usepackage[russian]{babel}
+\usepackage[T2A]{fontenc}
+\usepackage{floatrow}
+\usepackage{makecell,multirow}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{textcomp}
+\usepackage[pdftex,unicode,pdfpagelayout=SinglePage,pdfborder={0 0 0},hidelinks,pdfhighlight=/P%
+]{hyperref}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\definecolor{background}{rgb}{0.99,0.98,0.85}
+\pagecolor{background}
+\definecolor{siniy}{RGB}{46,48,146}
+\definecolor{zadan}{RGB}{181,223,253}
+\definecolor{golub}{RGB}{224,222,239}
+\definecolor{zhelt}{RGB}{255,221,47}
+\definecolor{cerise}{rgb}{0.87, 0.19, 0.39}
+\definecolor{taupe}{rgb}{0.28, 0.24, 0.2}
+\definecolor{mintgreen}{rgb}{0.6, 1.0, 0.6}
+\definecolor{magicmint}{rgb}{0.67, 0.94, 0.82}
+\definecolor{emerald}{rgb}{0.31, 0.78, 0.47}
+\definecolor{gr}{RGB}{2, 184, 3}
+\definecolor{mg}{RGB}{160, 53, 213}
+\definecolor{fgr}{RGB}{152, 223, 138}
+\definecolor{lmg}{RGB}{216, 171, 238}
+
+\newcommand{\knopka}[2]{\protect\parbox[c][0.4in][t]{1.2in}{\begin{tikzpicture}
+		\node[
+		rectangle,
+		rounded corners=2ex, 
+		minimum width=1.2in,
+		minimum height=0.4in,
+		top color=#1!30!white,
+		bottom color=#1,
+		draw=#1!90!black,
+		thick,
+		append after command={
+			node[rectangle,
+			rounded corners=2ex,
+			draw=#1!90!white,
+			minimum width=1.15in,
+			minimum height=.37in,
+			font=\sffamily]at(\tikzlastnode.center)
+			{\textcolor{white}{\contour{#1}{#2}}}
+		},
+		general shadow={
+			shadow xshift=.2ex, shadow yshift=-.2ex,
+			opacity=.5, fill=black!50,
+		}
+		](knp){};
+		\end{tikzpicture}}}
+
+\newcommand{\circleknopka}[2]{\protect\parbox[c][0.4in][t]{1.2in}{\begin{tikzpicture}
+		\node[
+		circle,
+		minimum size=0.4in,
+		top color=#1!30!white,
+		bottom color=#1,
+		draw=#1!90!black,
+		thick,
+		append after command={
+			node[circle,
+			draw=#1!90!white,
+			minimum size=.37in,
+			font=\sffamily]at(\tikzlastnode.center)
+			{\textcolor{white}{\contour{#1}{#2}}}
+		},
+		general shadow={
+			shadow xshift=.2ex, shadow yshift=-.2ex,
+			opacity=.5, fill=black!50,
+		}
+		](knp){};
+		\end{tikzpicture}}}
+
+\usepackage{flowfram}
+\newflowframe{0.85\textwidth}{\textheight}{0.195\paperwidth}{0cm}
+
+
+\newdynamicframe{1.3in}{1.6in}{0.12in}{0.4in}[but1]
+\setdynamiccontents*{but1}{
+	\begin{Form}
+		\begin{center}
+			\PushButton[name=result,%
+			onclick={callAlert()},
+			bordercolor=background]{\knopka{gr}{ЗАВЕРШИТЬ}}
+		\end{center}
+	\end{Form}
+}
+
+\newdynamicframe{1.3in}{0.9in}{0.12in}{0.4in}[but2]
+\setdynamiccontents*{but2}{
+	\begin{center}
+		\begin{Form}
+			\PushButton[name=savedata,%
+			onclick={saveAlert();},bordercolor=background]{\knopka{mg}{СОХРАНИТЬ}}
+		\end{Form}
+	\end{center}
+}
+
+
+\newdynamicframe{1.3in}{0.2in}{0.12in}{0.4in}[butclose]
+\setdynamiccontents*{butclose}{
+	\begin{center}
+		\begin{Form}
+			\PushButton[name=close,%
+			onclick={closeAlert();},bordercolor=background]{\knopka{mg}{ЗАКРЫТЬ}}
+		\end{Form}
+	\end{center}
+}
+
+\newdynamicframe{3cm}{9.1cm}{-0.3cm}{1cm}[but3]
+\setdynamiccontents*{but3}{
+	{\tabulinesep=1.2mm
+\begin{tabu}{ ccc  }
+	\multicolumn{3}{c}{
+		\vspace*{0.1cm}\begin{minipage}[c]{0.22\textwidth}
+			Перейти к заданию
+		\end{minipage}} \\
+		\hyperlink{z1}{\protect\parbox[c][1cm][t]{1cm}{
+				\circleknopka{gr}{1}}}&\hyperlink{z2}{\protect\parbox[c][1cm][t]{1cm}{
+				\circleknopka{gr}{2}}}&\hyperlink{z3}{\protect\parbox[c][1cm][t]{1cm}{
+				\circleknopka{gr}{3}}}\\
+		\hyperlink{z4}{\protect\parbox[c][1cm][t]{1cm}{
+		\circleknopka{gr}{4}}}&\hyperlink{z5}{\protect\parbox[c][1cm][t]{1cm}{
+		\circleknopka{gr}{5}}}&\hyperlink{z6}{\protect\parbox[c][1cm][t]{1cm}{
+		\circleknopka{gr}{6}}}\\
+		\hyperlink{z7}{\protect\parbox[c][1cm][t]{1cm}{
+				\circleknopka{gr}{7}}}&\hyperlink{z8}{\protect\parbox[c][1cm][t]{1cm}{
+				\circleknopka{gr}{8}}}&\hyperlink{z9}{\protect\parbox[c][1cm][t]{1cm}{
+				\circleknopka{gr}{9}}}
+	\end{tabu}}
+}
+
+\newdynamicframe{3cm}{14.8cm}{6.6cm}{1cm}[but4]
+\setdynamiccontents*{but4}{
+	\begin{Form}
+	\TextField[%
+	name=fio,align=1,width=10cm,bordercolor=background,backgroundcolor=background,readonly=true]{}
+\end{Form}
+		}
+		
+\newdynamicframe{3cm}{13.9cm}{5.3cm}{1cm}[but5]
+\setdynamiccontents*{but5}{
+	\begin{Form}
+		\raisebox{-2pt}{\TextField[%
+		name=time,align=1,width=5cm,bordercolor=background,backgroundcolor=background,charsize=12pt,readonly=true,calculate={Dat();}]{}}
+	\end{Form}
+}
+
+\newdynamicframe{5cm}{13.9cm}{13.7cm}{1cm}[but6]
+\setdynamiccontents*{but6}{
+	\begin{Form}
+		Осталось \raisebox{-2pt}{\TextField[%
+		name=timer,align=1,width=1cm,bordercolor=mg,backgroundcolor=lmg,readonly=true,charsize=12pt,value=90]{}}~мин.
+	\end{Form}
+}
+
+
+\tikzstyle{mebox} = [draw=gr, fill=fgr, very thick,
+rectangle, rounded corners, inner sep=10pt, inner ysep=20pt]
+\tikzstyle{fanctitle} =[fill=gr, text=white, ellipse]
+
+\newcommand{\leftframe}[1]{\begin{center}
+		\begin{tikzpicture}[transform shape, rotate=0, baseline=-3.5cm]
+		\node [mebox] (box) {
+			\begin{minipage}[c]{0.22\textwidth}\vspace*{8pt}\hspace{1pt}
+			Осталось сделать\vspace*{5pt}
+			
+			#1
+			\end{minipage}
+		};
+		\node[fanctitle] at (box.north) {\large{Вариант №\,5}};
+		\end{tikzpicture}
+	\end{center}}
+
+
+\newdynamicframe{6.2cm}{14.5cm}{-1.2cm}{1cm}[numvar]
+\setdynamiccontents*{numvar}{\leftframe{
+\begin{center}
+		\begin{Form}
+			\TextField[%
+			name=info,align=1,width=3.5cm,bordercolor=gr,readonly=true,multiline=true,height=1cm,value={1, 2, 3, 4, 5, 6, 7, 8, 9}]{}
+	\end{Form}	
+\end{center}
+		}}
+
+\setlength{\parindent}{0.0cm}
+
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}%
+	{\hbox{\mathsurround=0pt #1}}{}}
+
+
+\usetikzlibrary{arrows,topaths,shapes,shadows}
+
+\tikzstyle{mynewbox} = [draw=mg, fill=lmg, very thick,
+rectangle, rounded corners, inner sep=10pt, inner ysep=20pt]
+\tikzstyle{fancytitlenew} =[fill=mg, text=white, ellipse]
+
+\newcommand{\rez}[2]{\begin{center}
+		\begin{tikzpicture}[transform shape, rotate=0, baseline=-3.5cm]
+		\node [mynewbox] (box) {%
+			\begin{minipage}[c]{0.7\textwidth}
+			#2
+			\end{minipage}
+		};
+		\node[fancytitlenew] at (box.north) {\hypertarget{#1}{Результаты}};
+		\end{tikzpicture}
+	\end{center}}
+	
+\tikzstyle{mybox} = [draw=blue!50!cyan, fill=zadan, very thick,
+rectangle, rounded corners, inner sep=10pt, inner ysep=20pt]
+\tikzstyle{fancytitle} =[fill=blue!50!cyan, text=white, ellipse]
+
+\newcommand{\zd}[2]{\begin{center}
+		\begin{tikzpicture}[transform shape, rotate=0, baseline=-3.5cm]
+		\node [mybox] (box) {%
+			\begin{minipage}[c]{0.7\textwidth}
+			#2
+			\end{minipage}
+		};
+		\node[fancytitle] at (box.north) {\hypertarget{#1}{Задание №\thetest}};
+		\end{tikzpicture}
+	\end{center}}
+
+
+
+
+\newcounter{test}
+\renewcommand{\thetest}{\arabic{test}}
+
+\newcommand{\tstthree}[7]{
+	\refstepcounter{test}
+	\ifthenelse{\thetest=10}{\setcounter{test}{1}}{\relax}
+	\noindent\vspace{4pt}\\#4
+	\vspace{10pt}
+	\begin{center}
+		\begin{Form}
+			\ChoiceMenu[name=#1,width=#2cm,radio=true,radiosymbol=4,bordercolor=blue!50!cyan,keystroke={notSolve("#1");}]{}{{#5}={1},
+				{\hspace*{#3cm}#6}={2},
+				{\hspace*{#3cm}#7}={3}}	
+		\end{Form}
+\end{center}}
+
+\newcommand{\tstfr}[8]{
+	\refstepcounter{test}
+	\ifthenelse{\thetest=10}{\setcounter{test}{1}}{\relax}
+	\noindent\vspace{4pt}\\#4
+	\vspace{10pt}
+	\begin{center}
+		\begin{Form}
+			\ChoiceMenu[name=#1,width=#2cm,radio=true,radiosymbol=4,bordercolor=blue!50!cyan,keystroke={notSolve("#1");}]{}{{#5}={1},
+				{\hspace*{#3cm}#6}={2},
+				{\hspace*{#3cm}#7}={3},
+				{\hspace*{#3cm}#8}={4}}	
+		\end{Form}
+	\end{center}}
+	
+\newcommand{\tstfv}[9]{
+	\refstepcounter{test}
+	\ifthenelse{\thetest=10}{\setcounter{test}{1}}{\relax}
+	\noindent\vspace{4pt}\\#4
+	\vspace{10pt}
+	\begin{center}
+		\begin{Form}
+			\ChoiceMenu[name=#1,width=#2cm,radio=true,radiosymbol=4,bordercolor=blue!50!cyan,keystroke={notSolve("#1");}]{}{{#5}={1},
+				{\hspace*{#3cm}#6}={2},
+				{\hspace*{#3cm}#7}={3},
+				{\hspace*{#3cm}#8}={4},
+				{\hspace*{#3cm}#9}={5}}	
+		\end{Form}
+	\end{center}}
+
+
+
+
+\DeclareMathOperator{\rg}{rg}
+
+\makeatletter
+\renewcommand{\@biblabel}[1]{#1.\hfill}
+\makeatother
+
+
+\usepackage[pdftex]{insdljs}
+\begin{insDLJS}[exaacb]{exaacb}{JavaScript functions}
+
+
+
+	function mySaveAs() {
+		var docpath = this.path;
+		var arrpath = docpath.split('/');
+		arrpath.pop();
+		arrpath.pop();
+		var nm = this.getField("fio").value;
+		var nam1 = nm.replace(", ","_");
+		var nam2 = nam1.replace(". "+String.fromCharCode(8470)+" ","_");
+		var nam3 = nam2.replace(/ /g,"_");
+		var newpath = arrpath.join('/')+"/Res/"+nam3+".pdf";
+		this.saveAs(newpath);	
+	}
+	
+	
+	
+	function DoIt() {		
+		var f = this.getField("timer");				
+		if(timeout.count<90){
+			timeout.count++;
+			f.value = 90 - timeout.count;}
+		else{doRes();this.getField("result").readonly=true;app.clearInterval(timeout);f.value =0;};		
+	}	
+	
+	if(this.getField("result").readonly==false){
+		timeout = app.setInterval("DoIt()", 60000);	
+		timeout.count = 0;
+		}
+	
+	
+	function Dat(){var d = new Date();
+		var month = new Array();
+		month[0] = String.fromCharCode(1103, 1085, 1074, 1072, 1088, 1103);
+		month[1] = String.fromCharCode(1092, 1077, 1074, 1088, 1072, 1083, 1103);
+		month[2] = String.fromCharCode(1084, 1072, 1088, 1090, 1072);
+		month[3] = String.fromCharCode(1072, 1087, 1088, 1077, 1083, 1103);
+		month[4] = String.fromCharCode(1084, 1072, 1103);
+		month[5] = String.fromCharCode(1080, 1102, 1085, 1103);
+		month[6] = String.fromCharCode(1080, 1102, 1083, 1103);
+		month[7] = String.fromCharCode(1072, 1074, 1075, 1091, 1089, 1090, 1072);
+		month[8] = String.fromCharCode(1089, 1077, 1085, 1090, 1103, 1073, 1088, 1103);
+		month[9] = String.fromCharCode(1086, 1082, 1090, 1103, 1073, 1088, 1103);
+		month[10] = String.fromCharCode(1085, 1086, 1103, 1073, 1088, 1103);
+		month[11] = String.fromCharCode(1076, 1077, 1082, 1072, 1073, 1088, 1103);
+		var n = month[d.getMonth()];
+		this.getField("time").value=d.getDate()+String.fromCharCode(45, 1077)+" "+n+" "+d.getFullYear()+" "+String.fromCharCode(1075, 1086, 1076, 1072);}
+	
+	function docOpen(){
+		%	this.gotoNamedDest("z1");
+	}
+	
+	function getArrayDiff(a, b) {
+		var ret = [];
+		if (!(Array.isArray(a) && Array.isArray(b))) {
+			return ret;
+		}
+		var i;
+		var key;
+		
+		for (i = a.length - 1; i >= 0; i--) {
+			key = a[i];
+			if (-1 === b.indexOf(key)) {
+				ret.push(key);
+			}
+		}
+		
+		return ret;
+	}
+	
+	function doRes(){
+		 var fld=["v1z1","v1z2","v1z3","v1z4","v1z5","v1z6","v1z7","v1z8","v1z9"];
+		 var otv=[4, 2, 2, 1, 5, 4, 1, 4, 5];
+		 var aa=this.getField("info").value;
+		 var f = [];
+		 var sum=0;
+		 for(var i = 0; i < fld.length; i++){
+		 	if(this.getField(fld[i]).value==otv[i]){sum+=1;this.getField(fld[i]).textColor=[ "RGB", 0,1,0 ];}
+		 	else{
+		 	%this.getField(fld[i]).multipleSelection=true;this.getField(fld[i]).checkThisBox(otv[i]-1,true);
+		 	this.getField(fld[i]).textColor=color.red;
+		 	%this.getField("Nslv").value+=(i+1).toString()+""};
+		 	f.push(i+1);
+		 	
+		 	%elem.fillColor=[ "RGB", 0,1,0 ];
+		 	
+		 	%else{this.getField(otv[i]).fillColor=mg};
+		 	}
+		 	
+		 	this.getField(fld[i]).readonly=true;}
+
+		 if((typeof(aa)=="string")&&(aa.indexOf(String.fromCharCode(1042))==-1)){
+		 	var ba=aa.split(',');
+		 	var ca=ba.map(Number);
+		 	var razn = getArrayDiff(f, ca); 
+		 	if(razn.length!=0){
+				this.getField("Nslv").value=razn.join(', ');
+				}
+			else{
+				this.getField("Nslv").value=
+				String.fromCharCode(1054, 1096, 1080, 1073, 1086, 1095, 1085, 1086, 32, 1088, 1077, 1096, 1105, 1085, 1085, 1099, 1093, 32, 1079, 1072, 1076, 1072, 1085, 1080, 1081, 32, 1085, 1077, 1090, 33);
+			}
+		 	}
+		 else{
+		 	if(typeof(aa)=="number"){
+		 		var bb = [aa];
+		 		var razn = getArrayDiff(f, bb);
+		 		if(razn.length!=0){
+		 			this.getField("Nslv").value=razn.join(', ');
+		 		}
+		 		else{
+		 			this.getField("Nslv").value=
+		 			String.fromCharCode(1054, 1096, 1080, 1073, 1086, 1095, 1085, 1086, 32, 1088, 1077, 1096, 1105, 1085, 1085, 1099, 1093, 32, 1079, 1072, 1076, 1072, 1085, 1080, 1081, 32, 1085, 1077, 1090, 33);
+		 		}
+		 		}
+		 	else{var razn = f;
+		 		if(razn.length!=0){
+		 			this.getField("Nslv").value=razn.join(', ');
+		 		}
+		 		else{
+		 			this.getField("Nslv").value=
+		 			String.fromCharCode(1054, 1096, 1080, 1073, 1086, 1095, 1085, 1086, 32, 1088, 1077, 1096, 1105, 1085, 1085, 1099, 1093, 32, 1079, 1072, 1076, 1072, 1085, 1080, 1081, 32, 1085, 1077, 1090, 33);
+		 		}}
+		 	};
+	
+		 this.getField("Nvp").value=aa;
+		 this.getField("procent").value = Math.round(sum*100/fld.length)}
+	
+	function doAlert(){
+		var nButton = app.alert({			
+			cMsg: String.fromCharCode(1053, 1072, 1078, 1072, 1074, 32, 1085, 1072, 32, 1082, 1085, 1086, 1087, 1082, 1091, 32, 34, 1044, 1072, 40, 79, 75, 41, 34, 44, 32, 1074, 1099, 32, 1087, 1086, 1090, 1077, 1088, 1103, 1077, 1090, 1077, 32, 1074, 1086, 1079, 1084, 1086, 1078, 1085, 1086, 1089, 1090, 1100, 32, 1080, 1089, 1087, 1088, 1072, 1074, 1083, 1103, 1090, 1100, 32, 1086, 1090, 1074, 1077, 1090, 1099, 32, 1085, 1072, 32, 1079, 1072, 1076, 1072, 1085, 1080, 1103, 32, 1090, 1077, 1089, 1090, 1072, 33, 32, 1042, 1099, 32, 1076, 1077, 1081, 1089, 1090, 1074, 1080, 1090, 1077, 1083, 1100, 1085, 1086, 32, 1093, 1086, 1090, 1080, 1090, 1077, 32, 1079, 1072, 1074, 1077, 1088, 1096, 1080, 1090, 1100, 32, 1090, 1077, 1089, 1090, 1080, 1088, 1086, 1074, 1072, 1085, 1080, 1077, 63),			
+			cTitle: String.fromCharCode(1042, 1053, 1048, 1052, 1040, 1053, 1048, 1045, 33),			
+			nIcon: 2, nType: 2			
+		});
+		
+		if ( nButton == 4 ) {doRes();this.getField("result").readonly=true;app.clearInterval(timeout);this.gotoNamedDest("resul");};
+	}
+	
+	function saveAlert(){
+		if(this.getField("result").readonly==false){		
+			app.alert({			
+				cMsg: String.fromCharCode(1058, 1077, 1089, 1090, 32, 1085, 1077, 32, 1079, 1072, 1074, 1077, 1088, 1096, 1105, 1085, 33, 32, 1042, 1085, 1072, 1095, 1072, 1083, 1077, 32, 1085, 1072, 1078, 1084, 1080, 1090, 1077, 32, 1085, 1072, 32, 1082, 1085, 1086, 1087, 1082, 1091, 32, 34, 1047, 1040, 1042, 1045, 1056, 1064, 1048, 1058, 1068, 34, 33),			
+				cTitle: String.fromCharCode(1042, 1053, 1048, 1052, 1040, 1053, 1048, 1045, 33),				
+			});
+		}
+	else{
+		this.getField("savedata").readonly=true; mySaveAs();
+		}
+	}
+	
+		function closeAlert(){
+		if(this.getField("savedata").readonly==false){		
+			app.alert({			
+				cMsg: String.fromCharCode(1058, 1077, 1089, 1090, 32, 1085, 1077, 32, 1089, 1086, 1093, 1088, 1072, 1085, 1105, 1085, 33, 32, 1055, 1088, 1077, 1078, 1076, 1077, 32, 1095, 1077, 1084, 32, 1079, 1072, 1082, 1088, 1099, 1090, 1100, 32, 1090, 1077, 1089, 1090, 44, 32, 1085, 1072, 1078, 1084, 1080, 1090, 1077, 32, 1085, 1072, 32, 1082, 1085, 1086, 1087, 1082, 1091, 32, 34, 1057, 1054, 1061, 1056, 1040, 1053, 1048, 1058, 1068, 34, 46),			
+				cTitle: String.fromCharCode(1042, 1053, 1048, 1052, 1040, 1053, 1048, 1045, 33),				
+			});
+		}
+		else{
+			this.closeDoc();
+		}
+	}
+	
+	function callAlert(){
+		var s1 = new Date();
+		doAlert();
+		var s2 = new Date();
+		timeout.count+=Math.ceil((s2-s1)/60000);
+	}
+
+	
+	function notSolve(x){
+		var flds=["v1z1","v1z2","v1z3","v1z4","v1z5","v1z6","v1z7","v1z8","v1z9"];
+		function Bl(value){
+			if (value==flds.indexOf(x)+1){return false}else{return true}};
+		var a=this.getField("info").value;	
+		if ((typeof(a)=="string")&&(a.indexOf(String.fromCharCode(1042))==-1)){
+		var b=a.split(',');
+		var otvs=b.map(Number);
+		this.getField("info").value=otvs.filter(Bl).join(', ');
+		}
+	else{
+		this.getField("info").value=String.fromCharCode(1042, 1099, 32, 1074, 1099, 1087, 1086, 1083, 1085, 1080, 1083, 1080, 32, 1074, 1089, 1077, 32, 1079, 1072, 1076, 1072, 1085, 1080, 1103, 33);}
+		%Вы выпонили все задания!
+						
+		}
+
+
+\end{insDLJS}
+\OpenAction{/S /JavaScript /JS (docOpen();)}
+\newcommand{\textforlabel}[2]{%
+	\TextField[name={#1},value={#2},width=6cm,align=2,%
+	bordercolor={0.99 0.98 0.85},%
+	backgroundcolor={0.99 0.98 0.85},readonly=true]{}%
+}
+
+\hypersetup{ 
+	pdfauthor   = {Михеев Андрей}, 
+	pdfkeywords = {LaTeX, линейная алгебра, векторная алгебра, тесты, электронные формы}, 
+	pdftitle    = {Тесты по теме "Линейная и векторная алгебра"} 
+}
+
+\pagestyle{empty}
+
+\begin{document}
+	
+	\title{Тесты по теме "Линейная и векторная алгебра"}
+	\author{Михеев Андрей}
+	\date{\today}
+
+\zd{z1}{\tstfv{v1z1}{0.5}{1}{
+		Если $\left(x_0;y_0;z_0\right)$ "--- решение системы $\left\{ \begin{gathered}
+		x + 2y + 3z = -7 \hfill \\
+		2x - y - z = 1 \hfill \\
+		5x - 4y + 24z =  7 \hfill \\
+		\end{gathered}  \right.$, то значение выражения $3x_0+3y_0$ равно:}{$-9$}{$-10$}{$-11$}{$-12$}{$-13$}}
+	
+
+\zd{z2}{\tstfr{v1z2}{0.5}{0.7}{Если  $A=\begin{pmatrix}
+		0 & 1 & -4\\
+		-3 & 2 & 2\\
+		1 & -6 & 1\\
+		4 & 0 & -5\\
+		\end{pmatrix}$, $B=\begin{pmatrix}
+		1 & 0 \\
+		-3 & 4 \\
+		1 & -2 \\
+		\end{pmatrix}$, то $A\cdot B$ равно}
+	{$\left(\begin{smallmatrix}
+		0 & 0 \\
+		9 & 8 \\
+		1 & 12 \\
+		\end{smallmatrix}\right)$}
+	{$\left(\begin{smallmatrix}
+		-7 & 12 \\
+		-7 & 4 \\
+		20 & -26 \\
+		-1 & 10 \\
+		\end{smallmatrix}\right)$}
+	{$\left(\begin{smallmatrix}
+		1 & 1 \\
+		-6 & 6 \\
+		2 & -8 \\
+		\end{smallmatrix}\right)$}
+	{$\left(\begin{smallmatrix}
+		-3 & 3 & 4\\
+		0 & 1 & 2\\
+		\end{smallmatrix}\right)$}}
+
+\newpage
+
+\zd{z3}{\tstfv{v1z3}{0.5}{1}{Найти элемент матрицы, обратной к $A=\begin{pmatrix}
+		-3 & 1 & -1\\
+		0 & 6 & 1\\
+		2 & 0 & 4\\
+		\end{pmatrix}$, расположенный на пересечении третьей строки и второго столбца.}
+	{$2$}
+	{$-\tfrac{2}{58}$}
+	{$3$}
+	{$-\tfrac{3}{58}1$}
+	{$-58$}}
+
+\zd{z4}{\tstfr{v1z4}{0.5}{0.2}{Если $\vec{a}=\{-3;8\}$, $\vec{b}=\{3;-1\}$, $\vec{c}=\{1;2\}$, то
+		разложение вектора $\vec{a}$ по базису $\vec{b}, \vec{c}$ ($\vec{a}=\alpha\vec{b}+\beta\vec{c}$\,) имеет вид:}
+	{$\vec{a}=-2\vec{b}+3\vec{c}$}
+	{$\vec{a}=4\vec{b}+\vec{c}$}
+	{$\vec{a}=\tfrac{2}{7}\vec{b}-\vec{c}$}
+	{$\vec{a}=\vec{b}-5\vec{c}$}}
+
+\zd{z5}{\tstfv{v1z5}{0.5}{1}{Проекция вектора $\vec{a}=\{4;0;-3\}$ на вектор $\vec{b}=\{-1;8;4\}$ равна:}
+	{$-16$}
+	{$16$}
+	{$\tfrac{16}{9}$}
+	{$4$}
+	{$-\tfrac{16}{9}$}}
+
+\zd{z6}{\tstfv{v1z6}{0.5}{1}{Если $\left|\vec{a}\right|=3$, $|\vec{b}\,|=4$, угол между векторами $\vec{a}$ и $\vec{b}$ равен $\frac{\pi}{3}$, то значение выражения $(3\vec{a}+2\vec{b}\,)\cdot(7\vec{b}-\vec{a}\,)$ равно:}
+	{$114$}
+	{$228$}
+	{$425$}
+	{$311$}
+	{$\tfrac{425}{2}$}}
+
+\zd{z7}{\tstthree{v1z7}{0.5}{0.6}{Если $A(1;6;-2)$, $B(3;0;8)$, $C(6;-1;-2)$, \\то вектор $\left(\overrightarrow{CA}-2\overrightarrow{BA}\right)\times\left(\overrightarrow{BC}+\overrightarrow{AC}\right)$ равен:}
+	{$210\vec{i}+150\vec{j}+48\vec{k}$}
+	{$-80\vec{i}+4\vec{j}-2\vec{k}$}
+	{$2\vec{i}-50\vec{j}+4\vec{k}$}}
+
+\zd{z8}{\tstfv{v1z8}{0.5}{1.1}{Объём параллелепипеда, построенного на векторах $\vec{a}=\{-2;3;5\}$, $\vec{b}=\{2;3;-1\}$, $\vec{c}=\{0;-1;2\}$ составляет:}
+	{$-32$}
+	{$-16$}
+	{$16$}
+	{$32$}
+	{$\tfrac{16}{3}$}}
+
+\zd{z9}{\tstfv{v1z9}{0.5}{1}{Сумма собственных значений матрицы $\begin{pmatrix}
+		5 & 2 \\
+		2 & 8 \\
+		\end{pmatrix}$ равна:}
+	{$36$}
+	{$160$}
+	{$26$}
+	{$48$}
+	{$13$}}
+
+\rez{resul}{
+\begin{Form}
+	{\tabulinesep=1.2mm
+	\begin{tabu}{ r l  }
+			\vspace*{0.2cm}Набранные баллы (max=100)&\TextField[%
+			name=procent,align=1,width=2.2cm,bordercolor={0 0 0},readonly=true]{}\\			
+			\vspace*{0.2cm}Неверно выполнены задания&\TextField[%
+			name=Nslv,align=0,align=1,width=5.9cm,bordercolor={0 0 0},readonly=true]{}\\
+			\vspace*{0.2cm}Не выполнены задания&\TextField[%
+			name=Nvp,align=0,align=1,width=5.9cm,bordercolor={0 0 0},readonly=true]{}
+		\end{tabu}}
+	\end{Form}
+}
+
+%\begin{Form}
+%	\begin{center}
+%		\PushButton[name=proba,%
+%		onclick={prob();},
+%		bordercolor=background]{\knopka{gr}{ПРОБА}}
+%	\end{center}
+%\end{Form}
+
+\end{document}
